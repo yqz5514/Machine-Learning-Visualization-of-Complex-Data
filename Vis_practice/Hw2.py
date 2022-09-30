@@ -67,3 +67,4 @@ plt.xlabel('Date')
 plt.ylabel('Amount')
 plt.show()
 # %%
+plt.savefig('Q9(3)',dpi = 500)

@@ -41,7 +41,7 @@ plt.tight_layout()
 plt.show()
 
 #%%
-# x = np.linspace(1,10)
+x = np.linspace(1,10)
 # y = [10 ** el for el in x]
 # z = [2 ** el for el in x]
 #
@@ -49,7 +49,7 @@ plt.show()
 # ax1 = fig.add_subplot(2,2,1)
 # ax1.plot(x,y, color = 'blue')
 # ax1.set_yscale('log')
-# ax1.set_title('Logarithmic plot of $10^{x}$')
+ax1.set_title('Logarithmic plot of $10^{x}$')
 # ax1.set_ylabel('$y = 10^{x} $')
 # plt.grid(visible=True, which='both')
 #

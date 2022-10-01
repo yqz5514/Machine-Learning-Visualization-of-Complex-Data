@@ -120,12 +120,19 @@ def get_subplot_hist(col):
     return
 # %%
 get_subplot_hist('High')
+get_subplot_hist('Low')
+get_subplot_hist('Open')
+get_subplot_hist('Close')
+get_subplot_hist('Volume')
+get_subplot_hist('Adj Close')
+
+
 # %%
 aapl.corr()
 # %%
 from prettytable import PrettyTable
 
 #%%
-_ = aapl[aapl.columns].scatter(figsize=(16, 16))
+#_ = aapl[aapl.columns].scatter(figsize=(16, 16))
 # %%
 #correlation matrix

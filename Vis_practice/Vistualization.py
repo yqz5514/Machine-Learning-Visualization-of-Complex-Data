@@ -366,3 +366,83 @@ ax[1,1].plot(x,y4)
 plt.show()
 # RuntimeWarning: invalid value encountered in sqrt
 # %%
+# dataframe
+# conditional selection
+# be able to use three way to do the subplot
+
+#################################################10/05##############################################
+
+#%%
+url = 'https://raw.githubusercontent.com/rjafari979/Information-Visualization-Data-Analytics-Dataset-/main/mnist_test.csv'
+df = pd.read_csv(url) #low_memory=False) 
+#print(df.head(5))
+#%%
+#print(df.info)
+#%%
+
+df0 = df[df['label']==0]
+print(df0.shape)
+
+#%%
+for i in range(10):
+    df0 = df[df['label']==i]
+    print(f'number of observations corresponding to {i} is {df0.shape[0]}')
+# %%
+plt.figure(figsize=(12,12))
+for i in range(10):
+    df0 = df[df['label']==i]
+    pic = df0[0:1].values.reshape(785)[1:].reshape(28,28)
+    plt.subplot(4,3,i+1)
+    plt.imshow(pic)
+
+plt.tight_layout()
+plt.show()
+    
+#%%
+plt.subplot(3, 4,i+1)
+
+#%%
+############pie chart#####################
+data = [23,17,32,29,12]
+label = ['C','C++','Java','Python','GO']
+explode = (0,0,0,0,0)
+plt.figure()
+plt.pie(data,labels = label, explode=explode)
+plt.show()
+
+#%%
+data = [23,17,32,29,12]
+label = ['C','C++','Java','Python','GO']
+explode = (0.03,0.03,0.2,0.03,0.03)
+plt.figure()
+plt.pie(data,labels = label, explode=explode,autopct='%1.2f%%')#display percentage
+plt.legend(loc= (.85,.85))
+plt.axis('square') # make sure the plot will be in circle shape
+plt.show()
+# %%
+# bar plot
+score = [23,17,32,29,12]
+label = ['C','C++','Java','Python','GO']
+#explode = (0,0,0,0,0)
+plt.figure()
+plt.bar(label, score)
+plt.ylabel('score')
+plt.xlabel('languages')
+plt.title('simple bar plot')
+plt.show()
+# %%
+# stack bar plot
+score_men = [23,17,32,29,12]
+score_men_norm = (score_men)/np.sqrt(np.sum(np.sqrt(score_men)))# L2 normalized
+score_women = [35,25,10,15,18]
+label = ['C','C++','Java','Python','GO']
+#explode = (0,0,0,0,0)
+plt.figure()
+plt.bar(label, score_men, label = 'men')
+plt.bar(label, score_women, bottom = score_men, label='women')
+
+plt.ylabel('score')
+plt.xlabel('languages')
+plt.title('simple stack bar plot')
+plt.show()
+# %%

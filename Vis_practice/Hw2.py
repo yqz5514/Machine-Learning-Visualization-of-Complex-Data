@@ -66,6 +66,7 @@ get_subplot('High')
 
 #%%
 get_subplot('Low')
+#%%
 get_subplot('Open')
 get_subplot('Close')
 get_subplot('Volume')
@@ -156,9 +157,8 @@ x.field_names = ['Name','High','Low','Open','Close','Volume','Adj Close']
 
 #%%
 pd.plotting.scatter_matrix(aapl, hist_kwds= {'bins' : 50} , alpha = 0.5, s = 10, diagonal = 'kde')
-plt.grid(visible=True)
-plt.show()
-# %%
+
+#%%
 pd.plotting.scatter_matrix(aapl, hist_kwds= {'bins' : 50} , alpha = 0.5, s = 10, diagonal = 'hist', grid = True, figsize=(18,18) )
 
 # %%

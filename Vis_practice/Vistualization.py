@@ -1,5 +1,6 @@
 #%%
 from tkinter import Scale
+from turtle import left
 from xml.etree.ElementInclude import include
 import numpy as np # linear algebra
 import pandas as pd 
@@ -366,10 +367,10 @@ ax[1,1].plot(x,y4)
 plt.show()
 # RuntimeWarning: invalid value encountered in sqrt
 # %%
-# dataframe
+# dataframe table
 # conditional selection
 # be able to use three way to do the subplot
-
+# cheat sheet with formula
 #################################################10/05##############################################
 
 #%%
@@ -446,3 +447,100 @@ plt.xlabel('languages')
 plt.title('simple stack bar plot')
 plt.show()
 # %%
+width = 0.4
+score_men = [23,17,32,29,12]
+#score_men_norm = (score_men)/np.sqrt(np.sum(np.sqrt(score_men)))# L2 normalized
+score_women = [35,25,10,15,18]
+label = ['C','C++','Java','Python','GO']
+x = np.arange(len(label))
+fig,ax = plt.subplots()
+ax.bar(x - width/2, score_men, width, label='men')
+ax.bar(x + width/2, score_women, width, label='women')
+ax.set_ylabel('scores')
+ax.set_xlabel('languages')
+ax.set_xticks(x)
+ax.set_xticklabels(label)
+ax.legend()
+plt.show()
+# %%
+######group bar plot
+# create data
+x = ['A', 'B', 'C', 'D']
+y1 = np.array([10, 20, 10, 30])
+y2 = np.array([20, 25, 15, 25])
+y3 = np.array([12, 15, 19, 6])
+y4 = np.array([10, 29, 13, 19])
+ 
+# plot bars in stack manner
+plt.bar(x, y1, color='r')
+plt.bar(x, y2, bottom=y1, color='b')
+plt.bar(x, y3, bottom=y1+y2, color='y')
+plt.bar(x, y4, bottom=y1+y2+y3, color='g')
+plt.xlabel("Teams")
+plt.ylabel("Score")
+plt.legend(["Round 1", "Round 2", "Round 3", "Round 4"])
+plt.title("Scores by Teams in 4 Rounds")
+plt.show()
+
+# %%
+# barh()
+# plot it in horizontally
+score_men = [23,17,32,29,12]
+#score_men_norm = (score_men)/np.sqrt(np.sum(np.sqrt(score_men)))# L2 normalized
+score_women = [35,25,10,15,18]
+label = ['C','C++','Java','Python','GO']
+fig = plt.figure()
+plt.barh(label, score_men, label='men')
+plt.barh(label, score_women, left=score_men, label='men')
+plt.ylabel('languages')
+plt.xlabel('scores')
+plt.title('simple stack bar plot')
+plt.legend(loc = 1)
+plt.show()
+# %%
+x = ['A', 'B', 'C', 'D']
+y1 = np.array([10, 20, 10, 30])
+y2 = np.array([20, 25, 15, 25])
+y3 = np.array([12, 15, 19, 6])
+y4 = np.array([10, 29, 13, 19])
+ 
+# plot bars in stack manner
+plt.barh(x, y1, color='r')
+plt.barh(x, y2, left=y1, color='b')
+plt.barh(x, y3, left=y1+y2, color='y')
+plt.barh(x, y4, left=y1+y2+y3, color='g')
+plt.ylabel("Teams")
+plt.xlabel("Score")
+plt.legend(["Round 1", "Round 2", "Round 3", "Round 4"])
+plt.title("Scores by Teams in 4 Rounds")
+plt.show()
+#%%
+width = 0.4
+score_men = [23,17,32,29,12]
+#score_men_norm = (score_men)/np.sqrt(np.sum(np.sqrt(score_men)))# L2 normalized
+score_women = [35,25,10,15,18]
+label = ['C','C++','Java','Python','GO']
+x = np.arange(len(label))
+fig,ax = plt.subplots()
+ax.barh(x - width/2, score_men, width, label='men')
+ax.barh(x + width/2, score_women, width, label='women')
+ax.set_xlabel('scores')
+ax.set_ylabel('languages')
+ax.set_yticks(x)
+ax.set_yticklabels(label)
+ax.legend()
+plt.show()
+# %%
+# area line
+
+#%%
+df = pd.read_excel('Sample - Superstore.xls')
+# %%
+df1 = df.groupby('Region').sum()
+plt.figure()
+plt.bar(df1.index, df1['Profit'])
+plt.show()
+# %%
+# cat
+# find categorical variables under different country 
+# see class notes from today

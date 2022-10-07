@@ -47,7 +47,9 @@ for match in matches:
 #%%
 sum(1 for _ in re.finditer(pattern_ISD,text))
 #8363
-
+#becasue there are many ISD value besides the one associate with publish time
+#probably can check see if only publish time start with 1976 then we can parse it by that
+#if not, find shared pattern
 #%%%
 pattern_ABS = re.compile(r'ABST\s.+\s.+[A-Z]$')
 matches = pattern_ABS.finditer(text)

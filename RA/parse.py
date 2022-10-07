@@ -60,6 +60,9 @@ pattern_ABS = re.compile(r'ABST*\n*((?:\n.*)+?)(?=\n[A-Z]{4}|\Z)')
 matches = pattern_ABS.finditer(text)
 for match in matches:
     print(match.group())     
+#    .*\n*: Match rest of the line followed by 0 or more line breaks
+#((?:\n.*)+?): Capture group 1 to capture our text which 1 or lines of everything until next condition is satisfied
+#(?=\nAREA:|\Z): Assert that we have a line break followed by AREA: or end of input right ahead of the current position
 #%%
 sum(1 for _ in re.finditer(pattern_ABS,text))
 # Search for 'ABST' 1379

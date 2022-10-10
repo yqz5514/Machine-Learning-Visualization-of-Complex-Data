@@ -116,3 +116,5 @@ result_1976.to_excel('demo.xlsx')
 #%%
 print(result_1976.head())
 # %%
+# publish day is same in one file?
+# CLAS problems

@@ -17,7 +17,7 @@ for match in matches:
     value = match.group()
 
     list.append(value)
-print(list)
+print(list[5])
 
 #%%
 len(list) #1379
@@ -28,6 +28,21 @@ type(abs_match)
 
 #%%
 abs_match
+#%%
+str_abs = ''.join(abs_match)
+print(str_abs[0:10])
+#%%
+p = re.compile(r'\W+(RE)?\d+')
+matches = p.finditer(str_abs)
+wku_num = []
+for match in matches:
+    value = match.group() # same value for 19760106_wk1
+    
+    wku_num.append(value)
+#print(match.group())
+
+#%%
+sum(1 for _ in re.finditer(p,str_abs))
 
 #%%
 print(list)
@@ -42,13 +57,25 @@ type(match.group())
 #%%
 pattern_ISD = re.compile(r'ISD\s\s(1976)\d+')
 matches = pattern_ISD.finditer(text)
-for match in matches:
-    print(match.group()) # same value for 19760106_wk1
-#%%
 ISD = []
-ISD.append(match.group())
+for match in matches:
+    value = match.group() # same value for 19760106_wk1
+    
+    ISD.append(value)
+print(ISD[5])
 #%%
-sum(1 for _ in re.finditer(pattern_ISD,text))
+ISD_str = ''.join(ISD)
+#%%
+pattern_ISD1 = re.compile(r'\W(1976)\d+')
+matches = pattern_ISD1.finditer(ISD_str)
+ISD_num = []
+for match in matches:
+    value = match.group() # same value for 19760106_wk1
+    
+    ISD_num.append(value)
+    #print(match.group())
+#%%
+sum(1 for _ in re.finditer(pattern_ISD1,ISD_str))
 #8363
 #becasue there are many ISD value besides the one associate with publish time
 #publish time start with 1976 #1379
@@ -73,12 +100,20 @@ ABST = []
 for match in matches:
     val = match.group()
     ABST.append(val)
-#print(ABST)
+print(ABST[5])
+#%%
+abst_str = ''.join(ABST)
+#%%
+pattern_ABS1 = re.compile(r'ABST\n*\n*((?:\n.*)+?)(?=\n[A-Z]{4}|\Z)')
+matches = pattern_ABS1.finditer(abst_str)
+#for match in matches:
+#    print(match.group())     
+
 #%%
 #abst = pd.DataFrame({'ABST':ABST})
 #abst.to_excel('abst_check.xlsx')
 #%%
-sum(1 for _ in re.finditer(pattern_ABS,text))
+sum(1 for _ in re.finditer(pattern_ABS1,abst_str))
 # Search for 'ABST' 1379
 # search in text file by case is 1379
 # search by paragraph with 1384 
@@ -111,10 +146,24 @@ sum(1 for _ in re.finditer(pattern_ICL,text))
 
     
 # %%
-result_1976 = pd.DataFrame({'Pattent ID':abs_match, 'Publish Date':ISD, 'Abstract':ABST})
-result_1976.to_excel('demo.xlsx')
+result_1976 = pd.DataFrame({'Pattent ID':wku_num, 'Publish Date':ISD_num, 'Abstract':ABST})
+#result_1976.to_excel('demo.xlsx')
+
 #%%
-print(result_1976.head())
+result_1976.to_pickle('demo1')
+#%%
+print(result_1976.tail())
+#%%
+result_1976.tail(5)
+#%%
+test = pd.read_pickle('demo1')
+print(test.head(10))
+#%%
+#create new columns to remove last digit
+# remove the abst\npal 
+# beasutiful soup
+# CLAS ~ FSC for us class 
+# FD
 # %%
 # publish day is same in one file?
 # CLAS problems

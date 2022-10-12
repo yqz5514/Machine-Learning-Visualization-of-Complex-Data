@@ -328,45 +328,9 @@ print(f'slope of the fitted line is {slope:.3f}')
 # review!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # lambda....
 # find a job .....
+
 # %%
-# matplotlib
-x = np.
-y1 = np.sin(x)
-y2 = np.cos(x)
-
-font1 = {'family':'serif','color':'blue','size':20}
-font2 = {'family':'serif','color':'darkred','size':20}
-
-c1 = np.random.rand(1,3)
-c2 = np.random.rand(1,3)
-
-plt.plot(x, y1,color=c1, linestyle ='-' )
-plt.plot(x, y2,color=c2)
-plt.xlabel('time',fontdict=font1)
-plt.ylabel('time',fontdict=font2)
-plt.grid(axis='x') # only x axis grid
-plt.show()
-#plt.tight_layout() do what? 
-# %%
-
-
-x = np.linspace(-10,10,1000)
-#x = np.array(x, dtype=np.complex)
-y1 = x ** 2
-y2 = x ** 3
-y3 = x ** (1/2)
-y4 = x ** (1/3)
-
-fig,ax = plt.subplots(2,2)
-ax[0,0].plot(x,y1)
-ax[0,1].plot(x,y2)
-ax[1,0].plot(x,y3)
-#x[1,0].set_title('$f(x)=\sqrt{x}$')
-ax[1,1].plot(x,y4)
-
-plt.show()
-# RuntimeWarning: invalid value encountered in sqrt
-# %%
+# exam 1
 # dataframe table
 # conditional selection
 # be able to use three way to do the subplot
@@ -447,6 +411,7 @@ plt.xlabel('languages')
 plt.title('simple stack bar plot')
 plt.show()
 # %%
+# group barplot
 width = 0.4
 score_men = [23,17,32,29,12]
 #score_men_norm = (score_men)/np.sqrt(np.sum(np.sqrt(score_men)))# L2 normalized
@@ -478,8 +443,8 @@ plt.bar(x, y3, bottom=y1+y2, color='y')
 plt.bar(x, y4, bottom=y1+y2+y3, color='g')
 plt.xlabel("Teams")
 plt.ylabel("Score")
-plt.legend(["Round 1", "Round 2", "Round 3", "Round 4"])
-plt.title("Scores by Teams in 4 Rounds")
+plt.legend(["Round 1", "Round 2", "Round 3", "Round 4"], loc='upper/lower/center right/left')
+plt.title("Scores by Teams in 4 Rounds", loc='left')
 plt.show()
 
 # %%
@@ -531,16 +496,179 @@ ax.set_yticklabels(label)
 ax.legend()
 plt.show()
 # %%
-# area line
+# boxplot
+# simple box-plot
+plt.figure()
+plt.boxplot(data)
+plt.xticks([1])
+plt.ylabel('Average')
+plt.xlabel('x')
+plt.grid()
+plt.show()
+
+#multivariable
+data=[data1, data2,...]
+plt.figure()
+plt.boxplot(data)
+plt.xticks([1,2,3,4])
+plt.ylabel('y')
+plt.xlabel('x')
+plt.title('')
+plt.grid()
+plt.show()
 
 #%%
+# simple area plot
+x = range(1,20)
+y = np.random.normal(10,2,len(x))
+plt.fill_between(x,y, alpha = 0.3,label = 'area between x and y')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend(loc='upper left')
+plt.title('t')
+plt.grid()
+plt.show()
+#%%
+#Multivariate Line plot
+# to set the plot size
+plt.figure(figsize=(16, 8), dpi=150)
+  
+# using plot method to plot open prices.
+# in plot method we set the label and color of the curve.
+tesla['Open'].plot(label='Tesla', color='orange')
+gm['Open'].plot(label='GM')
+ford['Open'].plot(label='Ford')
+  
+# adding title to the plot
+plt.title('Open Price Plot')
+  
+# adding Label to the x-axis
+plt.xlabel('Years')
+  
+# adding legend to the curve
+plt.legend()
+#%%
+#stem plot
+x = np.linspace(0.1,2*np.pi,41)
+y = np.exp(np.sin(x))
+(markers, stemlines, baseline) = plt.stem(y, label = 'sin(x)')
+plt.setp(markers, color='red',marker='o')
+plt.setp(baseline, color='grey', linewidth=2, linestyle='-')
+plt.title('')
+plt.xlabel()
+plt.ylabel()
+plt.grid()
+plt.show()
+#%%%
+import pandas as pd
+import matplotlib.pyplot as plt
+#%%
 df = pd.read_excel('Sample - Superstore.xls')
+#%%
+df.info()
+#%%
+df.value_counts()
+#%%
+df.head()
+#%%
+df.columns
 # %%
 df1 = df.groupby('Region').sum()
 plt.figure()
 plt.bar(df1.index, df1['Profit'])
 plt.show()
+#%%
+
+df2 = df['Product Name'].groupby(df['Region']).sum()
+#plt.figure()
+#plt.bar(df2., df1['Profit'])
+#plt.show()
+#%%
+df2.head()
 # %%
 # cat
 # find categorical variables under different country 
 # see class notes from today
+income_gender = pd.DataFrame(world1['income00'].groupby(world1['gender']).mean())
+
+#%%
+# plt.subplot(row,col,curent ax)
+
+
+# x = np.linspace(0, 2*np.pi, 1000)
+# y1 = np.sin(x)
+# y2 = np.cos(x)
+
+
+# font1 = {'family':'serif','color':'blue', 'size':20}
+# font2 = {'family':'serif','color':'darkred', 'size':15}
+#
+#
+# c1 = np.random.rand(1,3)
+# c2 = np.random.rand(1,3)
+#
+# plt.figure(figsize=(12,8))
+# plt.subplot(2,1,1)
+# plt.plot(x, y1, label = r'$\sin(x)$', lw = 4, color = c1, linestyle = ':')
+# plt.plot(x, y2, label = r'$\cos(x)$', lw = 2.5, color = c2, linestyle = '-')
+# plt.legend(loc = 'lower left')
+# plt.title('sine and cosine graph', fontdict=font1)
+# plt.xlabel('time', fontdict=font2)
+# plt.ylabel('Mag', fontdict=font2)
+# plt.grid(axis='x')
+#
+# plt.subplot(2,1,2)
+# plt.plot(x, y1+y2, label = r'$\sin(x)+\cos(x)$', lw = 4, color = c1, linestyle = '-.')
+# # plt.plot(x, y2, label = r'$\cos(x)$', lw = 2.5, color = c2, linestyle = '-')
+# plt.legend(loc = 'lower left')
+# plt.title(r'$\sin(x)+\cos(x)$', fontdict=font1)
+# plt.xlabel('time', fontdict=font2)
+# plt.ylabel('Mag', fontdict=font2)
+# plt.grid(axis='x')
+# plt.tight_layout()
+#
+# plt.show()
+
+#%%
+# plt.add_subplot
+x = np.linspace(1,10)
+y = [10 ** el for el in x]
+z = [2 ** el for el in x]
+fig = plt.figure(figsize=(10,8))
+ax1 = fig.add_subplot(2,2,1)
+ax1.plot(x,y, color = 'blue')
+ax1.set_yscale('log')
+ax1.set_title('Logarithmic plot of $10^{x}$')
+ax1.set_ylabel('$y = 10^{x} $')
+plt.grid(visible=True, which='both')
+#
+#
+# ax2 = fig.add_subplot(2,2,2)
+# ax2.plot(x,y, color = 'blue')
+# ax2.set_yscale('linear')
+# ax2.set_title('linear plot of $10^{x}$')
+# ax2.set_ylabel('$y = 10^{x} $')
+# plt.grid(visible=True, which='both')
+#
+#
+# ax3 = fig.add_subplot(2,2,3)
+# ax3.plot(x,z, color = 'green')
+# ax3.set_yscale('log')
+# ax3.set_title('Logarithmic plot of $10^{x}$')
+# ax3.set_ylabel('$y = 2^{x} $')
+# plt.grid(visible=True, which='both')
+#
+#
+# ax4 = fig.add_subplot(2,2,4)
+# ax4.plot(x,z, color = 'magenta')
+# ax4.set_yscale('linear')
+# ax4.set_title('Linear plot of $2^{x}$')
+# ax4.set_ylabel('$y = 2^{x} $')
+# plt.grid(visible=True, which='both')
+#
+# plt.tight_layout()
+# plt.show()
+
+#%%
+# hexbin plot is usefl to represent the relationship of two numerical variables whn you have many data points
+#plt.hexbin(x,y,gridsize=(50,50))

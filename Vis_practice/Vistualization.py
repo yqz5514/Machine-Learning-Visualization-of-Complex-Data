@@ -572,14 +572,36 @@ df.value_counts()
 df.head()
 #%%
 df.columns
+#%%
+df['Product Name'].value_counts()
 # %%
 df1 = df.groupby('Region').sum()
 plt.figure()
 plt.bar(df1.index, df1['Profit'])
 plt.show()
 #%%
+df3 = df.groupby(by = ['Product Name','Region']).count()
+df3.head(10)
+#%%
+df11 = df[['Region','Product Name']]
+df4 = df11[df11['Region'] =='Central'].groupby(['Product Name']).count()
+df4.head(4)
+#%%
+df5=df11.groupby('Region')['Product Name'].apply(lambda x: (x=='Staples').sum()).reset_index(name='count')
+df5.head()
+#%%
+df5.columns
+#%%
+df4.columns
+#%%
+plt.figure(figsize=(20,20))
+plt.bar(df5['Region'], df5['count'])
+plt.xticks(rotation=90)
+plt.tight_layout()
+plt.show()
+#%%
 
-df2 = df['Product Name'].groupby(df['Region']).sum()
+df2 = df['Product Name'].groupby(['Region']).count()
 #plt.figure()
 #plt.bar(df2., df1['Profit'])
 #plt.show()
@@ -641,33 +663,26 @@ ax1.set_yscale('log')
 ax1.set_title('Logarithmic plot of $10^{x}$')
 ax1.set_ylabel('$y = 10^{x} $')
 plt.grid(visible=True, which='both')
-#
-#
-# ax2 = fig.add_subplot(2,2,2)
-# ax2.plot(x,y, color = 'blue')
-# ax2.set_yscale('linear')
-# ax2.set_title('linear plot of $10^{x}$')
-# ax2.set_ylabel('$y = 10^{x} $')
-# plt.grid(visible=True, which='both')
-#
-#
-# ax3 = fig.add_subplot(2,2,3)
-# ax3.plot(x,z, color = 'green')
-# ax3.set_yscale('log')
-# ax3.set_title('Logarithmic plot of $10^{x}$')
-# ax3.set_ylabel('$y = 2^{x} $')
-# plt.grid(visible=True, which='both')
-#
-#
-# ax4 = fig.add_subplot(2,2,4)
-# ax4.plot(x,z, color = 'magenta')
-# ax4.set_yscale('linear')
-# ax4.set_title('Linear plot of $2^{x}$')
-# ax4.set_ylabel('$y = 2^{x} $')
-# plt.grid(visible=True, which='both')
-#
-# plt.tight_layout()
-# plt.show()
+ax2 = fig.add_subplot(2,2,2)
+ax2.plot(x,y, color = 'blue')
+ax2.set_yscale('linear')
+ax2.set_title('linear plot of $10^{x}$')
+ax2.set_ylabel('$y = 10^{x} $')
+plt.grid(visible=True, which='both')
+ax3 = fig.add_subplot(2,2,3)
+ax3.plot(x,z, color = 'green')
+ax3.set_yscale('linear')
+ax3.set_title('Logarithmic plot of $10^{x}$')
+ax3.set_ylabel('$y = 2^{x} $')
+plt.grid(visible=True, which='both')
+ax4 = fig.add_subplot(2,2,4)
+ax4.plot(x,z, color = 'magenta')
+ax4.set_yscale('linear')
+ax4.set_title('Linear plot of $2^{x}$')
+ax4.set_ylabel('$y = 2^{x} $')
+plt.grid(visible=True, which='both')
+plt.tight_layout()
+plt.show()
 
 #%%
 # hexbin plot is usefl to represent the relationship of two numerical variables whn you have many data points

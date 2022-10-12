@@ -243,7 +243,8 @@ dff2
 #fillna
 df.college.fillna(df['college'].mode()[0]#[0]make sure only return 1 number or will return a tuple becasue mode can be more than 1
                   , inplace = True)
-
+#df.bfill(axis ='rows') df.ffill(axis = 0)
+#df.bfill(axis ='columns') df.ffill(axis = 1)
 #%%
 # covariance matrix
 from numpy import linalg as LA 

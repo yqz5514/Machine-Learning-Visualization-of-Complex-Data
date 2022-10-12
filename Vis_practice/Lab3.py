@@ -1,6 +1,10 @@
 #Lab3
 
 #1. Load the dataset using pandas package. Clean the dataset by removing the ‘nan’ and missing data.
+missing_df = df.isnull().sum(axis=0).reset_index()
+missing_df.columns = ['variable', 'missing values']
+missing_df['filling factor (%)']=(df.shape[0]-missing_df['missing values'])/df.shape[0]*100
+missing_df.sort_values('filling factor (%)').reset_index(drop = True)
 #2. The country “China” has multiple columns (“ China.1”, “China.2”, …) . 
 # Create a new column name it “China_sum” which contains the sum of “China.1” + “China.2”, … column wise. 
 # You can use the following command to perform the task:

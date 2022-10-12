@@ -6,7 +6,9 @@ missing_df.columns = ['variable', 'missing values']
 missing_df['filling factor (%)']=(df.shape[0]-missing_df['missing values'])/df.shape[0]*100
 missing_df.sort_values('filling factor (%)').reset_index(drop = True)
 #2. The country “China” has multiple columns (“ China.1”, “China.2”, …) . 
+
 # Create a new column name it “China_sum” which contains the sum of “China.1” + “China.2”, … column wise. 
+
 # You can use the following command to perform the task:
 #3. Repeat step 2 for the “United Kingdom”.
 #4. Plot the COVID confirmed cases for the following US versus the time. The final plot should look like bellow.
@@ -34,3 +36,12 @@ df = sns.load_dataset('titanic')
 #11- Using the matplotlib and plt.subplots create a dashboard which includes all the pie charts above. Note: Use the figure size = (16,8). The final answer should look like the following.
 #All the figure should have the appropriate title and legend with a correct label.
 #Write an solution report and upload the .pdf file of the report and the .py through BB before the deadline.
+# function that extract statistical parameters from a grouby objet:
+def get_stats(group):
+    return {'min': group.min(), 'max': group.max(),
+            'count': group.count(), 'mean': group.mean()}
+#_______________________________________________________________
+# Creation of a dataframe with statitical infos on each airline:
+global_stats = df['DEPARTURE_DELAY'].groupby(df['AIRLINE']).apply(get_stats).unstack()
+global_stats = global_stats.sort_values('count')
+global_stats

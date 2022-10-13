@@ -133,20 +133,85 @@ import seaborn as sns
 df = sns.load_dataset('titanic')
 #1- The titanic dataset needs to be cleaned due to nan entries. Remove all the nan in the dataset using “”dropna()” method. 
 # Display the first 5 row of the dataset.
+#%%
+df.isnull().sum()
+#%%
+df.info
+#%%
+df.dropna(how ='any', inplace = True)
+#2- Write a python program that plot the pie chart and shows the number of male and female on the titanic dataset. 
+# The final answer should look like bellow.
+#%%
+df.head()
+#%%
+import pandas as pd
+#%%
+df_s = pd.DataFrame(df.sex.value_counts())
+#%%
+df_s
+#%%
 
-#2- Write a python program that plot the pie chart and shows the number of male and female on the titanic dataset. The final answer should look like bellow.
+explode = (0.03,0.03)
+#value = df_s['sex'].values
+plt.figure()
+plt.pie(df_s['sex'],labels = df_s.index, explode=explode, autopct='%1.2f')#display percentage
+plt.legend(loc= (.85,.85))
+plt.axis('square') # make sure the plot will be in circle shape
+plt.title('NUmbers of male and female', loc='center')
+plt.show()
+#%%
+fig,axes = plt.subplots(1,2,figsize=(15,8))
+labels = new_df[name_feature].unique()
+textprops = {"fontsize":15}
+
+axes[0].pie(new_df[new_df.HeartDisease=="No"][name_feature].value_counts(), labels=labels,autopct='%1.1f%%',textprops =textprops)
+axes[0].set_title('No Heart Disease',fontsize=15)
+axes[1].pie(new_df[new_df.HeartDisease=="Yes"][name_feature].value_counts(), labels=labels,autopct='%1.1f%%',textprops =textprops)
+axes[1].set_title('Yes Heart Disease',fontsize=15)
+
+plt.legend(title = name_feature, fontsize=15, title_fontsize=15)
+plt.show()
+    
 #3- Write a python program that plot the pie chart and shows the percentage of male and female on the titanic dataset. The final answer should look like bellow.
-#4- Write a python program that plot the pie chart showing the percentage of males who survived versus the percentage of males who did not survive. The final answer should look like bellow.
-#5- Write a python program that plot the pie chart showing the percentage of females who survived versus the percentage of females who did not survive. The final answer should look like bellow.
-#6- Write a python program that plot the pie chart showing the percentage passengers with first class, second class and third-class tickets. The final answer should look like bellow.
-#7- Write a python program that plot the pie chart showing the survival percentage rate based on the ticket class. The final answer should look like bellow.
-#8- Write a python program that plot the pie chart showing the percentage passengers who survived versus the percentage of passengers who did not survive with the first-class ticket category. The final answer should look like bellow.
-#9- Write a python program that plot the pie chart showing the percentage passengers who survived versus the percentage of passengers who did not survive with the second-class ticket category. The final answer should look like bellow.
+#%%
+plt.figure()
+explode = (0.03,0.03)
+
+plt.pie(df_s['sex'],labels = df_s.index, explode=explode, autopct='%1.2f%%')#display percentage
+plt.legend(loc= (.85,.85))
+plt.axis('square') # make sure the plot will be in circle shape
+plt.title('Numbers of male and female', loc='center')
+plt.show()
+#4- the percentage of males who survived versus the percentage of males who did not survive. 
+#%%
+df.columns
+
+#%%
+df_1 = df[df['sex']=='male']
+#%%
+df_ms = pd.DataFrame(df_1.survived.value_counts())
+df_ms
+#%%
+plt.figure()
+explode = (0.03,0.03)
+lb =['Male not survived', 'Male survived']
+plt.pie(df_ms['survived'], labels=lb, explode=explode, autopct='%1.2f%%')#display percentage
+plt.legend(loc= (.85,.85))
+plt.axis('square') # make sure the plot will be in circle shape
+plt.title('Pie chart of male survivale in titanic', loc='center')
+plt.show()
+#5- the percentage of females who survived versus the percentage of females who did not survive. 
+
+#6- the percentage passengers with first class, second class and third-class tickets. 
+#7- the survival percentage rate based on the ticket class. 
+#8- the percentage passengers who survived versus the percentage of passengers who did not survive with the first-class ticket category. The final answer should look like bellow.
+#9- the percentage passengers who survived versus the percentage of passengers who did not survive with the second-class ticket category. The final answer should look like bellow.
 #10- Write a python program that plot the pie chart showing the percentage passengers who survived versus the percentage of passengers who did not survive in the third-class ticket category.
 #11- Using the matplotlib and plt.subplots create a dashboard which includes all the pie charts above. Note: Use the figure size = (16,8). The final answer should look like the following.
 #All the figure should have the appropriate title and legend with a correct label.
 #Write an solution report and upload the .pdf file of the report and the .py through BB before the deadline.
 # function that extract statistical parameters from a grouby objet:
+#%%%
 def get_stats(group):
     return {'min': group.min(), 'max': group.max(),
             'count': group.count(), 'mean': group.mean()}

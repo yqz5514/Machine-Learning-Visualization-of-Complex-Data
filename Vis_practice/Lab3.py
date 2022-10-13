@@ -58,16 +58,17 @@ df.columns
 df['Country/Region'] = pd.to_datetime(df['Country/Region'])
 #%%
 df_us = df[['Country/Region','US']]
-
+#%%
+df.head()
 #%%
 # resampling
-resampled_month =df_us.resample('M', on='Country/Region').mean().reset_index(drop=False)
+#resampled_month =df_us.resample('M', on='Country/Region').mean().reset_index(drop=False)
 #%%
-resampled_month
+#resampled_month
 #%%
 y1=['US','United Kingdom','China','Germany','Brazil','India','Italy']
 plt.figure(figsize=(16, 8))
-df.plot(x = 'Country/Region', y = y1, label = "US" )
+df.plot(x = 'Country/Region', y = 'US', label = "US" )
 #df.plot(x = 'Country/Region', y = 'United Kingdom', label = "United Kingdom")
 #df.plot(x = 'Country/Region', y = 'China', label = "China")
 #df.plot(x = 'Country/Region', y = 'Germany', label = "Germany")
@@ -75,9 +76,9 @@ df.plot(x = 'Country/Region', y = y1, label = "US" )
 #df.plot(x = 'Country/Region', y = 'India', label = "India")
 #df.plot(x = 'Country/Region', y = 'Italy', label = "Italy")
 
-plt.title('GLobal confirmed cases')
+plt.title('US confirmed cases')
 # adding Label to the x-axis
-plt.ylabel('Confirmed Covid-10 cases')
+plt.ylabel('Confirmed Covid-19 cases')
 plt.xlabel('Year')
 #plt.xticks(['Feb2020','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov'])
 plt.tight_layout()
@@ -85,26 +86,54 @@ plt.tight_layout()
 # adding legend to the curve
 plt.legend()
 #%%
+#5. Repeat step 4 for the “United Kingdom”, “China”, ”Germany”, ”Brazil”, “India” and “Italy”. 
+# The final plot should look like bellow.
 df_11 = df[['Country/Region','US','UK_sum','China_sum','Germany','Brazil','India','Italy']]
 #%%
 ax = df_11.plot(x = 'Country/Region')
 
 # Additional customizations
 ax.set_xlabel('Date')
+ax.set_ylabel('Confirmed Covid-19 cases')
+ax.set_title('GLobal confirmed cases')
+
 ax.legend(fontsize=12)
 #%%
-#5. Repeat step 4 for the “United Kingdom”, “China”, ”Germany”, ”Brazil”, “India” and “Italy”. 
-# The final plot should look like bellow.
+
+#%%
 #6. Plot the histogram plot of the graph in Question 4.
+plt.figure(figsize=(10,8))
+
+df.plot.hist(x = 'Country/Region', y = 'US', label = "US" )
+plt.legend(loc = 1)
+plt.title('US confirmed case')
+plt.xlabel('Year')
+plt.ylabel('Confirmed Covid-19 cases')
+plt.tight_layout()
+plt.legend()
+plt.show()
+#%%
+df.head()
 #7. Plot the histogram plot of the graph in Question 5. Use subplot 3x2. Not shared axis.
 #8. Which country (from the list above) has the highest mean, variance and median of # of COVID confirmed cases?
+#%%
+y1=['US','UK_sum','China_sum','Germany','Brazil','India','Italy']
+
+for i in y1:
+    print(i, df[i].mean(), df[i].var(),df[i].median())
+    
+#%%
+df['US'].mean()
 #For the second part of this LAB you will learn how to use pandas package for data filtering and data selection 
 # and use the matplotlib package for visualization of pie chart. The dataset for this section of the LAB will is called ‘titanic’.
 # The titanic dataset can be uploaded using the following: 
+#%%
 import matplotlib.pyplot as plt 
 import seaborn as sns 
 df = sns.load_dataset('titanic')
-#1- The titanic dataset needs to be cleaned due to nan entries. Remove all the nan in the dataset using “”dropna()” method. Display the first 5 row of the dataset.
+#1- The titanic dataset needs to be cleaned due to nan entries. Remove all the nan in the dataset using “”dropna()” method. 
+# Display the first 5 row of the dataset.
+
 #2- Write a python program that plot the pie chart and shows the number of male and female on the titanic dataset. The final answer should look like bellow.
 #3- Write a python program that plot the pie chart and shows the percentage of male and female on the titanic dataset. The final answer should look like bellow.
 #4- Write a python program that plot the pie chart showing the percentage of males who survived versus the percentage of males who did not survive. The final answer should look like bellow.

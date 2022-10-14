@@ -13,7 +13,7 @@ df = pd.read_csv(ucl)
 #%%
 df.head()
 #%%
-df.isnull().sum()
+df.isnull().sum().to_string()
 #%%
 df.dropna(how ='any', inplace = True)
 #%%
@@ -39,11 +39,15 @@ df.iloc[0:,58:90]
 #%%
 df['China_sum'] = df.iloc[0:,58:90].astype(float).sum(axis=1)
 #%%
+df['China_sum']
+#%%
 ##3. Repeat step 2 for the “United Kingdom”.
 
-df.iloc[0:,250:260]
+df.iloc[0:,250:261]
 #%%
 df['UK_sum'] = df.iloc[0:,250:260].astype(float).sum(axis=1)
+#%%
+df['UK_sum']
 #%%
 df['China']
 
@@ -99,18 +103,89 @@ ax.set_title('GLobal confirmed cases')
 
 ax.legend(fontsize=12)
 #%%
+ax = df_11.plot(x = 'Country/Region')
+
+# Additional customizations
+ax.set_xlabel('Date')
+ax.set_ylabel('Confirmed Covid-19 cases')
+ax.set_title('GLobal confirmed cases')
+
+ax.legend(fontsize=12)
 
 #%%
 #6. Plot the histogram plot of the graph in Question 4.
 plt.figure(figsize=(10,8))
 
-df.plot.hist(x = 'Country/Region', y = 'US', label = "US" )
+plt.hist(df_us['US'], label = "US",bins=50 )
 plt.legend(loc = 1)
-plt.title('US confirmed case')
-plt.xlabel('Year')
-plt.ylabel('Confirmed Covid-19 cases')
+plt.title('distribution of cases')
+plt.xlabel('number of cases')
+plt.ylabel('freq')
 plt.tight_layout()
 plt.legend()
+plt.show()
+#%%
+#y1=['UK_sum','China_sum','Germany','Brazil','India','Italy']
+
+plt.figure(figsize=(12,12))
+plt.subplot(3,2,1)
+plt.hist(df['UK_sum'], label = "UK_sum",bins=50 )
+plt.legend(loc = 1)
+plt.title('distribution of cases')
+plt.xlabel('number of cases')
+plt.ylabel('freq')
+
+plt.subplot(3,2,2)
+plt.hist(df['China_sum'], label = "China_sum",bins=50 )
+plt.legend(loc = 1)
+plt.title('distribution of cases')
+plt.xlabel('number of cases')
+plt.ylabel('freq')
+
+plt.subplot(3,2,3)
+plt.hist(df['Germany'], label = "Germany",bins=50 )
+plt.legend(loc = 1)
+plt.title('distribution of cases')
+plt.xlabel('number of cases')
+plt.ylabel('freq')
+
+plt.subplot(3,2,4)
+plt.hist(df['Brazil'], label = "Brazil",bins=50 )
+plt.legend(loc = 1)
+plt.title('distribution of cases')
+plt.xlabel('number of cases')
+plt.ylabel('freq')
+
+plt.subplot(3,2,5)
+plt.hist(df['India'], label = "India",bins=50 )
+plt.legend(loc = 1)
+plt.title('distribution of cases')
+plt.xlabel('number of cases')
+plt.ylabel('freq')
+
+plt.subplot(3,2,6)
+plt.hist(df['Italy'], label = "Italy",bins=50 )
+plt.legend(loc = 1)
+plt.title('distribution of cases')
+plt.xlabel('number of cases')
+plt.ylabel('freq')
+
+plt.tight_layout()
+
+plt.show()
+
+#%%
+y1=['UK_sum','China_sum','Germany','Brazil','India','Italy']
+plt.figure(figsize=(12,12))
+for j in y1:
+    for i in range(6):
+       plt.hist(df[j], label = j ,bins=50 )
+       plt.subplot(3,2,i+1)
+       plt.legend(loc = 1)
+       plt.title('distribution of cases')
+       plt.xlabel('number of cases')
+       plt.ylabel('freq')
+    plt.tight_layout()
 plt.show()
 #%%
 df.head()
@@ -120,7 +195,7 @@ df.head()
 y1=['US','UK_sum','China_sum','Germany','Brazil','India','Italy']
 
 for i in y1:
-    print(i, df[i].mean(), df[i].var(),df[i].median())
+    print(i, round(df[i].mean(),2), round(df[i].var(),2),round(df[i].median(),2))
     
 #%%
 df['US'].mean()
@@ -139,10 +214,11 @@ df.isnull().sum()
 df.info
 #%%
 df.dropna(how ='any', inplace = True)
+df.isnull().sum()
 #2- Write a python program that plot the pie chart and shows the number of male and female on the titanic dataset. 
 # The final answer should look like bellow.
 #%%
-df.head()
+df.head(5)
 #%%
 import pandas as pd
 #%%
@@ -150,26 +226,15 @@ df_s = pd.DataFrame(df.sex.value_counts())
 #%%
 df_s
 #%%
-
+#lb =['94','88']
 explode = (0.03,0.03)
-#value = df_s['sex'].values
+value = df_s['sex'].values
 plt.figure()
-plt.pie(df_s['sex'],labels = df_s.index, explode=explode, autopct='%1.2f')#display percentage
-plt.legend(loc= (.85,.85))
+plt.pie(df_s['sex'],labels = df_s.index, explode=explode,autopct = lambda x: '{:.0f}'.format(x*value.sum()/100))#display num
 plt.axis('square') # make sure the plot will be in circle shape
-plt.title('NUmbers of male and female', loc='center')
-plt.show()
-#%%
-fig,axes = plt.subplots(1,2,figsize=(15,8))
-labels = new_df[name_feature].unique()
-textprops = {"fontsize":15}
+plt.legend(loc= (.85,.85))
 
-axes[0].pie(new_df[new_df.HeartDisease=="No"][name_feature].value_counts(), labels=labels,autopct='%1.1f%%',textprops =textprops)
-axes[0].set_title('No Heart Disease',fontsize=15)
-axes[1].pie(new_df[new_df.HeartDisease=="Yes"][name_feature].value_counts(), labels=labels,autopct='%1.1f%%',textprops =textprops)
-axes[1].set_title('Yes Heart Disease',fontsize=15)
-
-plt.legend(title = name_feature, fontsize=15, title_fontsize=15)
+plt.title('Numbers of male and female', loc='center')
 plt.show()
     
 #3- Write a python program that plot the pie chart and shows the percentage of male and female on the titanic dataset. The final answer should look like bellow.
@@ -180,7 +245,7 @@ explode = (0.03,0.03)
 plt.pie(df_s['sex'],labels = df_s.index, explode=explode, autopct='%1.2f%%')#display percentage
 plt.legend(loc= (.85,.85))
 plt.axis('square') # make sure the plot will be in circle shape
-plt.title('Numbers of male and female', loc='center')
+plt.title('Numbers of male and female in %', loc='center')
 plt.show()
 #4- the percentage of males who survived versus the percentage of males who did not survive. 
 #%%
@@ -201,23 +266,93 @@ plt.axis('square') # make sure the plot will be in circle shape
 plt.title('Pie chart of male survivale in titanic', loc='center')
 plt.show()
 #5- the percentage of females who survived versus the percentage of females who did not survive. 
-
+#%%
+#%%
+df_2 = df[df['sex']=='female']
+#%%
+df_ws = pd.DataFrame(df_2.survived.value_counts())
+df_ws
+#%%
+plt.figure()
+explode = (0.03,0.03)
+lb =['Female survived', 'Female not survived']
+plt.pie(df_ws['survived'], labels=lb, explode=explode, autopct='%1.2f%%')#display percentage
+plt.legend(loc= (.85,.85))
+plt.axis('square') # make sure the plot will be in circle shape
+plt.title('Pie chart of female survivale in titanic', loc='center')
+plt.show()
 #6- the percentage passengers with first class, second class and third-class tickets. 
+#%%
+df.columns
+#%%
+df['pclass'].value_counts()
+
 #7- the survival percentage rate based on the ticket class. 
+#%%
+#df_ps0 = df[df['survived']==0].groupby(df['pclass']).count()
+df_ps1 = df[df['survived']==1].groupby(df['pclass']).count()
+df_ps1
+#%%
+df_ps1.head()
+#%%
+q7 = df_ps1['survived']/59
+#%%
+#%%
+plt.figure()
+explode = (0.3,0.08,0.08)
+lb =['ticket class 1', 'ticket class 2','ticket class 3']
+plt.pie(q7, labels=lb, explode=explode, autopct='%1.2f%%')#display percentage
+plt.legend(loc= (.85,.85))
+plt.axis('square') # make sure the plot will be in circle shape
+plt.title('Survival rate base on level', loc='center')
+plt.show()
+#%%
 #8- the percentage passengers who survived versus the percentage of passengers who did not survive with the first-class ticket category. The final answer should look like bellow.
+#%%
+#%%
+plt.figure()
+explode = (0.02,0.02)
+data = [157-106, 106]
+lb =['Death rate', 'Survival rate']
+plt.pie(data, labels=lb, explode=explode, autopct='%1.2f%%')#display percentage
+plt.legend(loc= (.85,.85))
+plt.axis('square') # make sure the plot will be in circle shape
+plt.title('Survival&Death rate: ticker class 1', loc='center')
+plt.show()
 #9- the percentage passengers who survived versus the percentage of passengers who did not survive with the second-class ticket category. The final answer should look like bellow.
+#%%
+plt.figure()
+explode = (0.02,0.02)
+data = [15-12, 12]
+lb =['Death rate', 'Survival rate']
+plt.pie(data, labels=lb, explode=explode, autopct='%1.2f%%')#display percentage
+plt.legend(loc= (.85,.85))
+plt.axis('square') # make sure the plot will be in circle shape
+plt.title('Survival&Death rate: ticker class 2', loc='center')
+plt.show()
 #10- Write a python program that plot the pie chart showing the percentage passengers who survived versus the percentage of passengers who did not survive in the third-class ticket category.
+plt.figure()
+explode = (0.02,0.02)
+data = [10-5, 5]
+lb =['Death rate', 'Survival rate']
+plt.pie(data, labels=lb, explode=explode, autopct='%1.2f%%')#display percentage
+plt.legend(loc= (.85,.85))
+plt.axis('square') # make sure the plot will be in circle shape
+plt.title('Survival&Death rate: ticker class 3', loc='center')
+plt.show()
 #11- Using the matplotlib and plt.subplots create a dashboard which includes all the pie charts above. Note: Use the figure size = (16,8). The final answer should look like the following.
 #All the figure should have the appropriate title and legend with a correct label.
 #Write an solution report and upload the .pdf file of the report and the .py through BB before the deadline.
 # function that extract statistical parameters from a grouby objet:
-#%%%
-def get_stats(group):
-    return {'min': group.min(), 'max': group.max(),
-            'count': group.count(), 'mean': group.mean()}
-#_______________________________________________________________
-# Creation of a dataframe with statitical infos on each airline:
-global_stats = df['DEPARTURE_DELAY'].groupby(df['AIRLINE']).apply(get_stats).unstack()
-global_stats = global_stats.sort_values('count')
-global_stats
+
 # %%
+#%%
+fig,axes = plt.subplots(3,3,figsize=(16,8))
+
+axes[0].pie(new_df[new_df.HeartDisease=="No"][name_feature].value_counts(), labels=labels,autopct='%1.1f%%',textprops =textprops)
+axes[0].set_title('No Heart Disease',fontsize=15)
+axes[1].pie(new_df[new_df.HeartDisease=="Yes"][name_feature].value_counts(), labels=labels,autopct='%1.1f%%',textprops =textprops)
+axes[1].set_title('Yes Heart Disease',fontsize=15)
+
+plt.legend(title = name_feature, fontsize=15, title_fontsize=15)
+plt.show()

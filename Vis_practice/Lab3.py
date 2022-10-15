@@ -21,6 +21,8 @@ df.head()
 #%%
 df.isnull().sum()
 #%%
+df
+#%%
 missing_df = df.isnull().sum(axis=0).reset_index()
 missing_df.columns = ['variable', 'missing values']
 missing_df['filling factor (%)']=(df.shape[0]-missing_df['missing values'])/df.shape[0]*100

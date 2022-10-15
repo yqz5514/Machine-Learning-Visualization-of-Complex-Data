@@ -307,6 +307,15 @@ plt.axis('square') # make sure the plot will be in circle shape
 plt.title('Survival rate base on level', loc='center')
 plt.show()
 #%%
+
+plt.figure()
+explode = (0.3,0.08,0.08)
+lb =['ticket class 1', 'ticket class 2','ticket class 3']
+plt.pie(df['pclass'].value_counts(), labels=lb, explode=explode, autopct='%1.2f%%')#display percentage
+plt.legend(loc= (.85,.85))
+plt.axis('square') # make sure the plot will be in circle shape
+plt.title('Pie cahrt passengers base on level', loc='center')
+plt.show()
 #8- the percentage passengers who survived versus the percentage of passengers who did not survive with the first-class ticket category. The final answer should look like bellow.
 #%%
 #%%
@@ -346,13 +355,89 @@ plt.show()
 # function that extract statistical parameters from a grouby objet:
 
 # %%
+#%%##################################################################
+
+df_s = pd.DataFrame(df.sex.value_counts())
+df_1 = df[df['sex']=='male']
+df_ms = pd.DataFrame(df_1.survived.value_counts())
+df_2 = df[df['sex']=='female']
+df_ws = pd.DataFrame(df_2.survived.value_counts())
+df_ps1 = df[df['survived']==1].groupby(df['pclass']).count()
+q7 = df_ps1['survived']/59
+
 #%%
 fig,axes = plt.subplots(3,3,figsize=(16,8))
 
-axes[0].pie(new_df[new_df.HeartDisease=="No"][name_feature].value_counts(), labels=labels,autopct='%1.1f%%',textprops =textprops)
-axes[0].set_title('No Heart Disease',fontsize=15)
-axes[1].pie(new_df[new_df.HeartDisease=="Yes"][name_feature].value_counts(), labels=labels,autopct='%1.1f%%',textprops =textprops)
-axes[1].set_title('Yes Heart Disease',fontsize=15)
+value = df_s['sex'].values
+axes[0,0].pie(df_s['sex'],labels = df_s.index, explode = (0.03,0.03),autopct = lambda x: '{:.0f}'.format(x*value.sum()/100))#display num
+axes[0,0].axis('square') # make sure the plot will be in circle shape
+axes[0,0].legend(loc= (.85,.85))
+axes[0,0].set_title('Numbers of male and female', loc='center')
 
-plt.legend(title = name_feature, fontsize=15, title_fontsize=15)
+#axes[0,0].set_
+
+axes[0,1].pie(df_s['sex'],labels = df_s.index, explode = (0.03,0.03), autopct='%1.2f%%')#display percentage
+axes[0,1].legend(loc= (.85,.85))
+axes[0,1].axis('square') # make sure the plot will be in circle shape
+axes[0,1].set_title('Numbers of male and female in %', loc='center')
+
+
+
+
+lb =['Male not survived', 'Male survived']
+axes[0,2].pie(df_ms['survived'], labels=lb, explode = (0.03,0.03), autopct='%1.2f%%')#display percentage
+axes[0,2].legend(loc= (.85,.85))
+axes[0,2].axis('square') # make sure the plot will be in circle shape
+axes[0,2].set_title('Pie chart of male survivale in titanic', loc='center')
+
+
+
+explode = (0.03,0.03)
+lb1 =['Female survived', 'Female not survived']
+axes[1,0].pie(df_ws['survived'], labels=lb1, explode=explode, autopct='%1.2f%%')#display percentage
+axes[1,0].legend(loc= (.85,.85))
+axes[1,0].axis('square') # make sure the plot will be in circle shape
+axes[1,0].set_title('Pie chart of female survivale in titanic', loc='center')
+
+
+lb2 =['ticket class 1', 'ticket class 2','ticket class 3']
+axes[1,1].pie(q7, labels=lb2, explode = (0.3,0.08,0.08), autopct='%1.2f%%')#display percentage
+axes[1,1].legend(loc= (.85,.85))
+axes[1,1].axis('square') # make sure the plot will be in circle shape
+axes[1,1].set_title('Survival rate base on level', loc='center')
+
+
+data = [157-106, 106]
+lb3 =['Death rate', 'Survival rate']
+axes[1,2].pie(data, labels=lb3, explode = (0.02,0.02), autopct='%1.2f%%')#display percentage
+axes[1,2].legend(loc= (.85,.85))
+axes[1,2].axis('square') # make sure the plot will be in circle shape
+axes[1,2].set_title('Survival&Death rate: ticker class 1', loc='center')
+
+
+data1 = [15-12, 12]
+lb4 =['Death rate', 'Survival rate']
+axes[2,0].pie(data1, labels=lb4, explode = (0.02,0.02), autopct='%1.2f%%')#display percentage
+axes[2,0].legend(loc= (.85,.85))
+axes[2,0].axis('square') # make sure the plot will be in circle shape
+axes[2,0].set_title('Survival&Death rate: ticker class 2', loc='center')
+
+
+data2 = [10-5, 5]
+lb5 =['Death rate', 'Survival rate']
+axes[2,1].pie(data2, labels=lb5, explode = (0.02,0.02), autopct='%1.2f%%')#display percentage
+axes[2,1].legend(loc= (.85,.85))
+axes[2,1].axis('square') # make sure the plot will be in circle shape
+axes[2,1].set_title('Survival&Death rate: ticker class 3', loc='center')
+
+
+lb6 =['ticket class 1', 'ticket class 2','ticket class 3']
+axes[2,2].pie(df['pclass'].value_counts(), labels=lb6, explode = (0.3,0.08,0.08), autopct='%1.2f%%')#display percentage
+axes[2,2].legend(loc= (.85,.85))
+axes[2,2].axis('square') # make sure the plot will be in circle shape
+axes[2,2].set_title('Pie cahrt passengers base on level', loc='center')
+
+plt.tight_layout()
 plt.show()
+
+# %%

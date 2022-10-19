@@ -861,6 +861,7 @@ plt.show()
 # %%
 sns.displot(data=tip,
              x = 'total_bill',
-             kde = True)
+             kde = True,
+             )
 plt.show()
 # %%

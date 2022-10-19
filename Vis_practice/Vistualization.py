@@ -1,4 +1,5 @@
 #%%
+from re import L
 from tkinter import Scale
 from turtle import left
 from xml.etree.ElementInclude import include
@@ -688,3 +689,178 @@ plt.show()
 #%%
 # hexbin plot is usefl to represent the relationship of two numerical variables whn you have many data points
 #plt.hexbin(x,y,gridsize=(50,50))
+
+
+################################################10####19####notes########################################################################################
+#%%
+##################seaborn###################
+
+##final term project
+######transformation dropdown meun###############
+#normalization: x = (xi-minx)/(maxx-minx)    , x will be in [0,1]
+#sandarlization: x = (x-meanx)/x.std     , mean =0 & variance(x)=1
+#iqr: (perform bettern when have outlier), x = (x-x.median)/(3rdQ-4thQ)
+#differencing: first differencing# is first derivitive actually, second differencing #not require in project
+
+###interact dashboard
+###look at other's app get insight. how to design the app
+#movie review
+#%%
+##################seaborn###################
+import seaborn as sns 
+
+flight = sns.load_dataset('flights')
+
+#%%
+import matplotlib.pyplot as plt
+plt.style.use('seaborn-whitegrid')
+#%%
+flight.head
+# %%
+sns.lineplot(data = flight,
+             y = 'passengers',
+             x = 'year',
+             hue = 'month')
+plt.show()
+# %%
+sns.boxplot(data = flight.passengers)
+plt.show
+
+# %%
+tip = sns.load_dataset('tips')
+diamonds = sns.load_dataset('diamonds')
+penguins = sns.load_dataset('penguins')
+iris = sns.load_dataset('iris')
+
+#%%
+sns.countplot(data = tip,
+              x = 'sex')
+plt.show
+# %%
+sns.countplot(data = tip,
+              x = 'smoker',
+              hue = 'sex')
+plt.show
+
+# %%
+sns.countplot(data = tip,
+              x = 'day',
+              hue = 'sex')
+plt.show
+# %%
+sns.countplot(data = diamonds,
+              x = 'clarity', # change x to y make it horizental
+              order = diamonds['clarity'].value_counts().index)
+plt.show
+# %%
+sns.countplot(data = diamonds,
+              x = 'clarity', # change x to y make it horizental
+              order = diamonds['clarity'].value_counts().index[::-1])#desacding order
+plt.show
+# %%
+sns.countplot(data = diamonds,
+              x = 'clarity', # change x to y make it horizental
+              order = reversed(diamonds['clarity'].value_counts().index[::-1]))#desacding order
+plt.show
+# %%
+sns.barplot(data='diamonds',
+            x = 'color')
+plt.show()
+# %%
+#s = 'adigoiijjklkj'
+s =[1,2,3,4]
+s[::-1]
+# %%
+color_group = diamonds.groupby('color').count()
+#%%
+color_group
+# %%
+sns.barplot(data = color_group,
+             x = color_group.index,
+             y = 'cut')
+plt.show
+# %%
+#scatter plot
+sns.relplot(data=tip,
+            x = 'total_bill',
+            y = 'tip',
+            hue = 'day')
+plt.show()
+# x and y axis can not swap bcs independent and dependent variable is not interchangeable
+# %%
+sns.relplot(data=flight,
+            x = 'year',
+            y = 'passengers',
+            kind = 'line',
+            hue = 'month')
+plt.show()
+# %%
+sns.relplot(data=tip,
+            x = 'total_bill',
+            y = 'tip',
+            kind = 'scatter',
+            hue = 'day',
+            col = 'time')
+plt.show()
+# %%
+sns.relplot(data=tip,
+            x = 'total_bill',
+            y = 'tip',
+            kind = 'scatter',
+            hue = 'day',
+            col = 'time',
+            row = 'sex')
+plt.show()
+# %%
+flights = flight.pivot('month','year','passengers')
+#%%
+ax = sns.heatmap(flights, cmap='YlGnBu', linewidths=0.5 )# annot= True will add value to each cube
+plt.title('Heat Map')
+
+# %%
+sns.pairplot(data=penguins,
+             hue = 'species')
+plt.show()
+# %%
+sns.kdeplot(data=tip, # show the estimate of density function 
+             x = 'total_bill',
+             bw_adjust=0.2,#the higher this filter is the smmother the line will be
+             cut = 0)
+plt.show()
+# %%
+sns.kdeplot(data=tip,
+             x = 'total_bill',
+             hue = 'time',
+             multiple='stack'#fill the area under curve
+             )
+plt.show()
+# %%
+sns.kdeplot(data=diamonds,
+             x = 'price',
+             hue='cut',
+             log_scale= True,
+             fill=True,
+             alpha = .5,#transparency,
+             palette='crest'
+             )
+plt.show()
+# %%
+#contour plot
+sns.kdeplot(data=tip,
+             x = 'total_bill',
+             y = 'tip',
+             #fill=True
+             
+             )
+plt.show()
+# %%
+sns.lmplot(data=tip,
+             x = 'total_bill',
+             y = 'tip',)
+plt.show()
+# %%
+sns.displot(data=tip,
+             x = 'total_bill',
+             kde = True)
+plt.show()
+# %%

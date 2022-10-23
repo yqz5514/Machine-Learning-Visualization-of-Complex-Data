@@ -49,6 +49,7 @@ class Solution(object):
 #1 <= n <= 300
 #nums[i] is either 0, 1, or 2.
 #%%
+nums = [2,0,2,1,1,0]
 class Solution:
     def sortColors(self, nums):
         red, white, blue = 0, 0, len(nums)-1
@@ -58,14 +59,38 @@ class Solution:
                 nums[red], nums[white] = nums[white], nums[red] # swap index 
                 white += 1
                 red += 1
+                #print(nums[red], nums[white],nums[blue],white,red, blue)
             elif nums[white] > nums[blue]:
                 nums[white], nums[blue] = nums[blue], nums[white]
                 blue -= 1
+                #print(nums[red], nums[white],nums[blue],white,red, blue)
             else:
                 white += 1
+                #print(nums[red], nums[white],nums[blue],white,red, blue)
 #%%
-x = [2,3,4,1,1,1,1]
-x[1]
+def sortColors(nums):
+        red, white, blue = 0, 0, len(nums)-1
+        print(nums[red], nums[white],nums[blue],white,red, blue)
+    
+        while white <= blue: # for numbers not in list, position will return 1
+            if nums[white] == 0:
+                nums[red], nums[white] = nums[white], nums[red] # swap index 
+                white += 1
+                red += 1
+                print('1st',nums[red], nums[white],nums[blue],white,red, blue,nums)
+            elif nums[white] > nums[blue]:
+                nums[white], nums[blue] = nums[blue], nums[white]
+                blue -= 1
+                print('2nd',nums[red], nums[white],nums[blue],white,red, blue,nums)
+            else:
+                white += 1
+                print('3rd',nums[red], nums[white],nums[blue],white,red, blue,nums)
+
+#%%
+nums = [2,0,2,1,1,0]
+
+sortColors(nums)
+
 #%%
 ###414###Third Maximum Number
 #Given an integer array nums, return the third distinct maximum number in this array. If the third maximum does not exist, return the maximum number.

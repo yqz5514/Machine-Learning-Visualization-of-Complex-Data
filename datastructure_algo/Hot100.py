@@ -136,6 +136,6 @@ def thirdMax(self, nums):
         return max(nums)
     
 #%%
- return sorted(set(nums), reverse = True)[2] if len(set(nums)) >= 3 else max(nums)
+ #return sorted(set(nums), reverse = True)[2] if len(set(nums)) >= 3 else max(nums)
 #%%[Markdown]
 # 

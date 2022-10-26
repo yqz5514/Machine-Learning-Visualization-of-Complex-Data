@@ -1034,3 +1034,27 @@ fig = go.Figure()
 fig.add_trace(go.Histogram(y=iris['sepal_width'],nbinsx=40))
 fig.add_trace(go.Histogram(x = iris['sepal_length'], nbinsx=40))
 fig.update_layout(barmode = 'stack')
+
+#%%
+# subplot only in graph objects
+from plotly.subplots import make_subplots
+
+fig = make_subplots(rows =1, cols =2)
+
+fig.add_trace(
+    go.Scatter(x = [1,2,3], y = [4,5,6]),
+               row = 1, col = 1)
+
+
+fig.add_trace(
+    go.Scatter(x = [1,2,3], y = [4,5,6]),
+               row = 1, col = 2)
+
+fig.update_layout(width = 800, height = 600,
+                 title = 'side by side fig')
+
+#fig['layout']['xaxis']['title'] = 'label x - axis 1'
+#fig['layout']['xaxis2']['title'] = 'label x - axis 1'
+#fig['layout']['xaxis']['title'] = 'label x - axis 1'
+
+# %%

@@ -865,3 +865,172 @@ sns.displot(data=tip,
              )
 plt.show()
 # %%
+###################################1026######################################
+## dashboard
+# plot in  browser 
+# google cloud setup
+# search google cloud console create project 
+# plotly
+# based on dash 
+
+# %%
+import plotly.express as px
+import numpy as np
+import pandas as pd
+# %%
+x = np.linspace(-8,8,100)
+y = x ** 2
+z = x ** 3
+h = np.vstack((x,y,z))
+#%%
+print(h)
+# %%
+df = pd.DataFrame(data = h.T, columns=['x','$x^{2}$','$x^{3}$']) # T is transpose
+# %%
+df
+# %%
+fig = px.line(df,
+              x = 'x',
+              y = ['$x^{2}$','$x^{3}$'],
+              width = 800, height = 400,
+              title = r'$\text{Graph of}  x^2 \&  x^3$',
+              labels = {'value': 'USD($)',
+                        'x':'first variable'}
+              )
+fig.show(renderer = 'browser')
+# %%
+fig.update_layout(
+    title_font_size = 20,
+    title_font_color = 'red',
+    title_font_family = 'Times New Roman',
+    legrnd_title_font_size = 20,
+    legend_title_font_color = 'green',
+    font_color = 'blue',
+    font_family = 'Courier New'
+)
+#%%
+# import packages
+import pandas_datareader as web 
+import numpy as np
+import pandas as pd
+
+#%%
+#load data
+aapl = web.DataReader('AAPL', data_source='yahoo', start = '2000-01-01', end='2022-09-01')
+orcl = web.DataReader('ORCL', data_source='yahoo', start = '2000-01-01', end='2022-09-01')
+tsla = web.DataReader('TSLA', data_source='yahoo', start = '2000-01-01', end='2022-09-01')
+ibm  = web.DataReader('IBM', data_source='yahoo', start = '2000-01-01', end='2022-09-01')
+yelp = web.DataReader('YELP', data_source='yahoo', start = '2000-01-01', end='2022-09-01')
+msft = web.DataReader('MSFT', data_source='yahoo', start = '2000-01-01', end='2022-09-01')
+
+#%%
+aapl.drop('Volume', axis = 1, inplace = True)
+# %%
+fig = px.line(aapl,
+              #x = aapl.index,
+              #y = ['High','Low'],
+              y = aapl.columns,
+              width = 800, height = 800,
+              title = 'AAPL Stock Price',
+              labels = {'value': 'USD($)'}
+              )
+fig.show(renderer = 'browser')
+
+# %%
+iris = px.data.iris()#good classfifcation dataset
+tip = px.data.tips()
+gapminder = px.data.gapminder()
+
+#%%
+fig = px.line(iris,
+              x = 'species',
+              y = ['petal_length', 
+                   'petal_width',
+                   'sepal_length',
+                   'sepal_width'],
+              title = '',
+              width = 800, height = 400,
+              labels = {'value': 'dimension(cm)'},
+              template = 'plotly_white'
+              
+              )
+
+#%%
+fig = px.scatter(gapminder,
+                 x = 'gdpPercap',
+                 y = 'lifeExp',
+                 size = 'pop',
+                 color = 'continent',
+                 size_max = 55,
+                 animation_frame = 'year',
+                 animation_group = 'country',
+                 range_x = [0, 6000],
+                 range_y = [25, 90],
+                 title = 'GDP'
+                 )
+fig.show()
+#%%
+fig = px.choropleth(gapminder,
+                 location = 'iso_alpha',
+                 projection = 'natural earth',
+                 hover_name = 'country',
+                 color = 'lifeExp',
+                 animation_frame = 'year',
+                 #color_continuous_scale = px.colors.sequential.Plasma,# show the color for each country
+                 #animation_group = 'country',
+                 #range_x = [0, 6000],
+                 #range_y = [25, 90],
+                 title = 'GDP'
+                 )
+fig.show()
+
+#%%
+# horizontal bar plot
+fig = px.bar(tip,
+             x = 'total_bill',
+             y = 'day',
+             color = 'sex',
+             barmode = 'stack'
+             )
+fig.show() 
+
+#%%
+# diamond 
+import seaborn as sns 
+dia = sns.load_dataset('diamond')
+# %%
+dia1 = dia.groupby('color').sum()
+dia1 = dia1.reser_index()
+fig = px.bar(dia1,
+             x = 'color',
+             y = 'price'
+             )
+
+fig.show()
+
+#%%
+fig = px.bar(tip,
+             x = 'total_bill',
+             y = 'day',
+             color = 'sex',
+             barmode = 'group'
+             )
+fig.show() 
+
+#%%
+# experess is easiler
+# graph and objects is more complex.
+nbins = 50
+
+#%%
+import plotly.graph_objects as go
+# %%
+fig = go.Figure(data = [go.Histogram(x=iris['sepal_width'], # change x to y, will turn it to horizontal
+                nbinsx = 40)]
+    
+)
+#%%
+fig = go.Figure()
+fig.add_trace(go.Histogram(y=iris['sepal_width'],nbinsx=40))
+fig.add_trace(go.Histogram(x = iris['sepal_length'], nbinsx=40))
+fig.update_layout(barmode = 'stack')

@@ -139,6 +139,10 @@ def thirdMax(self, nums):
  #return sorted(set(nums), reverse = True)[2] if len(set(nums)) >= 3 else max(nums)
  # 
 #%%
+## array and two pointer
+
+
+
 # #26. Remove Duplicates from Sorted Array
 #Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same.
 
@@ -292,3 +296,111 @@ class Solution:
             if nums[slow] != 0:
                 slow += 1
         
+#%%
+# list
+# set list node
+# 数组在定义的时候，长度就是固定的，如果想改动数组的长度，就需要重新定义一个新的数组。查询频繁。
+
+# 链表的长度可以是不固定的，并且可以动态增删， 适合数据量不固定，频繁增删，较少查询的场景。
+class ListNode:
+    def __init__(self, val, next=None):
+        self.val = val
+        self.next = next
+
+#%%
+#203 Remove Linked List Elements
+#Given the head of a linked list and an integer val, remove all the nodes of the linked list that has Node.val == val, and return the new head.
+#Example 2:
+
+#Input: head = [], val = 1
+#Output: []
+#Example 3:
+
+#Input: head = [7,7,7,7], val = 7
+#Output: []
+
+
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeElements(self, head: ListNode, val: int) -> ListNode:
+        dummy_head = ListNode(next=head) #添加一个虚拟节点
+        cur = dummy_head
+        while(cur.next!=None):
+            if(cur.next.val == val):
+                cur.next = cur.next.next #删除cur.next节点
+            else:
+                cur = cur.next
+        return dummy_head.next
+    
+#%%
+# 206 reverse linked list
+# Given the head of a singly linked list, reverse the list, and return the reversed list.
+
+#双指针
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        cur = head   
+        pre = None
+        while(cur!=None):
+            temp = cur.next # 保存一下 cur的下一个节点，因为接下来要改变cur->next
+            cur.next = pre #反转
+            #更新pre、cur指针
+            pre = cur
+            cur = temp
+        return pre
+ 
+ 
+#recursive:
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        
+        def reverse(pre,cur):
+            if not cur:
+                return pre
+                
+            tmp = cur.next
+            cur.next = pre
+
+            return reverse(cur,tmp)
+        
+        return reverse(None,head)
+
+
+
+#%%
+# 237. Delete Node in a Linked List
+#There is a singly-linked list head and we want to delete a node node in it.
+
+#You are given the node to be deleted node. You will not be given access to the first node of head.
+
+#All the values of the linked list are unique, and it is guaranteed that the given node node is not the last node in the linked list.
+
+#Delete the given node. Note that by deleting the node, we do not mean removing it from memory. We mean:
+
+#The value of the given node should not exist in the linked list.
+#The number of nodes in the linked list should decrease by one.
+#All the values before node should be in the same order.
+#All the values after node should be in the same order.
+#Custom testing:
+
+#For the input, you should provide the entire linked list head and the node to be given node. node should not be the last node of the list and should be an actual node in the list.
+#We will build the linked list and pass the node to your function.
+#The output will be the entire list after calling your function.
+def deleteNode(self, node):
+    node.val = node.next.val
+    node.next = node.next.next

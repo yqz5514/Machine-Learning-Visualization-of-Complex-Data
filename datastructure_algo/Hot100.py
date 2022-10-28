@@ -404,3 +404,70 @@ class Solution:
 def deleteNode(self, node):
     node.val = node.next.val
     node.next = node.next.next
+    
+
+#%%
+## # 链表与双指针 
+
+# 876 Middle of the Linked List
+# Given the head of a singly linked list, return the middle node of the linked list.
+
+# If there are two middle nodes, return the second middle node.
+
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def middleNode(self, head):
+        slow = fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        return slow
+
+
+# %%
+# 141. Linked List Cycle
+# Given head, the head of a linked list, determine if the linked list has a cycle in it.
+# There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. 
+# Internally, pos is used to denote the index of the node that tail's next pointer is connected to. Note that pos is not passed as a parameter.
+# Return true if there is a cycle in the linked list. Otherwise, return false.
+
+class Solution:
+    def hasCycle(self, head):
+        try:
+            slow = head
+            fast = head.next
+            while slow is not fast:
+                slow = slow.next
+                fast = fast.next.next
+            return True
+        except:
+            return False
+        
+        
+#%%
+# 160 Intersection of Two Linked Lists
+# Given the heads of two singly linked-lists headA and headB, return the node at which the two lists intersect. If the two linked lists have no intersection at all, return null.
+# For example, the following two linked lists begin to intersect at node c1
+
+class Solution:
+    # @param two ListNodes
+    # @return the intersected ListNode
+    def getIntersectionNode(self, headA, headB):
+        if headA is None or headB is None:
+            return None
+
+        pa = headA # 2 pointers
+        pb = headB
+
+        while pa is not pb:
+            # if either pointer hits the end, switch head and continue the second traversal, 
+            # if not hit the end, just move on to next
+            pa = headB if pa is None else pa.next
+            pb = headA if pb is None else pb.next
+
+        return pa 

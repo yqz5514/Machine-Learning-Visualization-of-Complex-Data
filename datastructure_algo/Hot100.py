@@ -471,3 +471,5 @@ class Solution:
             pb = headA if pb is None else pb.next
 
         return pa 
+    
+

@@ -1058,3 +1058,206 @@ fig.update_layout(width = 800, height = 600,
 #fig['layout']['xaxis']['title'] = 'label x - axis 1'
 
 # %%
+#######################################11/02################################################
+# %%
+# # dash 
+import dash as dash
+from dash import dcc 
+from dash import html
+
+# %%
+# app.callback() connect to th input and output 
+# phase two
+my_app = dash.Dash('My App')
+
+#phase three
+# Divioison is a section of app
+my_app.layout=html.Div([html.H1('Hellow World! with html.H1',style={'textAlign':'right'}),
+                       html.H2('Hellow World! with html.H2',style={'textAlign':'right'}),
+                       html.H3('Hellow World! with html.H3',style={'textAlign':'right'}),
+                       html.H4('Hellow World! with html.H4',style={'textAlign':'right'}),
+                       html.H5('Hellow World! with html.H5',style={'textAlign':'right'}),
+                       html.H6('Hellow World! with html.H6',style={'textAlign':'right'}),
+                       
+])
+
+my_app.run_server(
+    port = 8002,
+    host = '0.0.0.0'
+)
+# %%
+my_app = dash.Dash('My App')
+
+#phase three
+# Divioison is a section of app
+my_app.layout=html.Div([html.H1('Assignment 1'),
+                       html.Button('submit assignment 1', id='a1'),
+                       
+                       html.H1('Assignment 2'),
+                       html.Button('submit assignment 2', id='a2'),
+                       
+                       html.H1('Assignment 2'),
+                       html.Button('submit assignment 2', id='a3'),
+                       
+                       html.H1('Assignment 2'),
+                       html.Button('submit assignment 2', id='a4'),
+                       
+                       
+])
+
+my_app.run_server(
+    port = 8003,
+    host = '0.0.0.0'
+)
+# %%
+my_app = dash.Dash('My App')
+my_app.layout = html.Div([html.H1('Complex Data Vis'),
+                          dcc.Dropdown(id='my_drop',options=[
+                              {'label': 'Introduction','value':'introduction'},
+                              {'label': 'Pandas','value':'Pandas'},
+                              {'label': 'seaborn','value':'seaborn'},
+                              {'label': 'plotly','value':'plotly'}'
+                              ])
+                    ]
+                    )
+my_app.run_server(
+    port = 8004,
+    host = '0.0.0.0'
+)
+
+
+#%%
+#multiple select9 multiple features to be select
+my_app = dash.Dash('My App')
+my_app.layout = html.Div([html.H1('Complex Data Vis'),
+                          dcc.Dropdown(id='my_drop',options=[
+                              {'label': 'Introduction','value':'introduction'},
+                              {'label': 'Pandas','value':'Pandas'},
+                              {'label': 'seaborn','value':'seaborn'},
+                              {'label': 'plotly','value':'plotly'}'
+                              ],multi=True) # how tolimite the bumber of multi selection
+                    ])
+my_app.run_server(
+    port = 8004,
+    host = '0.0.0.0'
+)
+
+#%%
+#phase4 callback
+from dash.dependencies import Input, Output
+#multiple select9 multiple features to be select
+my_app = dash.Dash('My App')
+my_app.layout = html.Div([html.H1('Complex Data Vis'),
+                          dcc.Dropdown(id='my_drop',options=[
+                              {'label': 'Introduction','value':'introduction'},
+                              {'label': 'Pandas','value':'Pandas'},
+                              {'label': 'seaborn','value':'seaborn'},
+                              {'label': 'plotly','value':'plotly'},
+                              ],multi=True), # how tolimite the bumber of multi selection
+                          
+                          html.Br(),
+                          html.Br(),# line of break
+                          html.Div(id='my_out')
+                    
+                    
+                    ])
+                    
+@my_app.callback(# whnerver have a callbakck need follow by a update function or will return error
+    Output(component_is='my_out',component_property='children'),
+    [Input(compnent_id='my_drop', component_property='value')]
+)
+
+def update_Reza(input):
+    return f'The select item is {input}'
+
+
+my_app.run_server(
+    port = 8004,
+    host = '0.0.0.0'
+)
+
+#%%
+# slider
+my_app = dash.Dash('My App')
+my_app.layout = html.Div([
+                          dcc.Slider(id='my_input',
+                          min = 10,
+                          max = 90,
+                          step = 5,
+                          value = 70
+                              ), # how tolimite the bumber of multi selection
+                          
+                          html.Div(id='my-out')
+                    
+                    
+                    ])
+                    
+@my_app.callback(# whnerver have a callbakck need follow by a update function or will return error
+    Output(component_is='my-out',component_property='children'),
+    [Input(compnent_id='my_input', component_property='value')] 
+)
+
+def update_Reza(Input):
+    return f'The select item is {(Intput-32)/1.8} celese'
+
+
+my_app.run_server(
+    port = 8004,
+    host = '0.0.0.0'
+)
+
+#%%
+# out put as slider
+my_app = dash.Dash('My App')
+my_app.layout = html.Div([
+                          dcc.Slider(id='my-input',
+                          min = 10,
+                          max = 90,
+                          step = 5,
+                          value = 70
+                              ), # how tolimite the bumber of multi selection
+                          
+                          html.Div(id='my-out')
+                    
+                    
+                    ])
+                    
+@my_app.callback(# whnerver have a callbakck need follow by a update function or will return error
+    Output(component_is='my-out',component_property='children'),
+    [Input(compnent_id='my_input', component_property='value')] 
+)
+
+def update_Reza(Input):
+    return f'The select item is {(Input-32)/1.8:.2f} celese'
+
+
+my_app.run_server(
+    port = 8004,
+    host = '0.0.0.0'
+    
+    
+)
+
+#%%
+# tabs
+my_app = dash.Dash('My App')
+my_app.layout=html.Div({
+    html.H1('HW9', style={'textAlign':'Center'}),
+    html.Br(),
+    dcc.Tabs(id='hw-questions',
+             children=[
+                 dcc.Tab(label='Question 1', value='q1'),
+                 dcc.Tab(label='Question 2', value='q2')
+             ]),
+    html.Div(id='layout')
+    
+    
+    
+})
+
+queation1_layout =html.Div([
+    html.H1(),
+    html.H5(),
+    html.P('Input')
+])
+

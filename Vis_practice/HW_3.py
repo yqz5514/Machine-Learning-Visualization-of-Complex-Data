@@ -71,7 +71,7 @@ sns.displot(data=penguins,
 )
 plt.show()
 # %%
-sns.histplot(data=penguins,
+sns.displot(data=penguins,
              x='flipper_length_mm',
              hue='species',
              multiple='stack',
@@ -92,12 +92,12 @@ sns.displot(data=penguins,
 )
 plt.show()
 # %%
-sex_df = penguins[['flipper_length_mm','sex']]
-#%%
-male = sex_df[sex_df['sex']=='Male']
-#male
-female = sex_df[sex_df['sex']=='Female']
-#%%
+# sex_df = penguins[['flipper_length_mm','sex']]
+# #%%
+# male = sex_df[sex_df['sex']=='Male']
+# #male
+# female = sex_df[sex_df['sex']=='Female']
+# #%%
 #10
 # fig, axs =plt.subplots(1,2,figsize=(15, 5), sharey=True)
 # sns.histplot(x='flipper_length_mm',
@@ -109,6 +109,7 @@ female = sex_df[sex_df['sex']=='Female']
 #             hue='sex',
 #             ax=axs[1])
 # fig.show()
+#%%
 sns.displot(data=penguins, x="flipper_length_mm", col="sex")
 #`displot` is a figure-level function and does not accept the ax= parameter. You may wish to try histplot.
 # %%
@@ -174,10 +175,10 @@ sns.displot(data=penguins,
             )
 # %%
 #20
-sns.relplot(data=penguins,
+sns.lmplot(data=penguins,
             x = 'bill_length_mm',
             y = 'bill_depth_mm',
-            kind = 'line',
+            
             )
 plt.show()
 # %%
@@ -221,21 +222,19 @@ sns.kdeplot(data=penguins,
              x = 'flipper_length_mm',
              y = 'bill_depth_mm',
              hue = 'sex',
-             # fill = True,
+             fill = True,
              #palette='crest'
-             cbar = True
+             #cbar = True
              )
 plt.show()
 # %%
 #26
-fig, axs =plt.subplots(3,1,figsize=(10,18), sharey=True)
+fig, axs =plt.subplots(3,1,figsize=(8,16))
 sns.kdeplot(data=penguins,
              x = 'bill_length_mm',
              y = 'bill_depth_mm',
              hue = 'sex',
-             fill = True,
-             log_scale= True,
-            
+             fill = True,         
              ax=axs[0]
              )
 
@@ -244,7 +243,7 @@ sns.kdeplot(data=penguins,
              y = 'flipper_length_mm',
              hue = 'sex',
              fill = True,
-             log_scale= True,
+             #log_scale= True,
              ax=axs[1]
              )
 
@@ -253,10 +252,20 @@ sns.kdeplot(data=penguins,
              y = 'bill_depth_mm',
              hue = 'sex',
              fill = True,
-             log_scale= True,
+             #log_scale= True,
              ax=axs[2]
              )
 
+# axs[0].set_xlim(25, 65)
+# axs[0].set_ylim(10, 24)
+
+# axs[1].set_xlim(25, 65)
+# axs[1].set_ylim(160, 260)
+
+# axs[2].set_xlim(160, 260)
+# axs[2].set_ylim(10, 24)
+
+# fig.savefig('Q26',dpi = 500)
 fig.show()
 # %%
 #27
@@ -282,3 +291,10 @@ sns.displot(penguins,
             hue='sex')  
 plt.show()
 # %%
+df = penguins[['sex','flipper_length_mm']]
+# %%
+# df[df['sex']=='Male']['flipper_length_mm'].mean()
+# # %%
+# df[df['sex']=='Female']['flipper_length_mm'].mean()
+
+# # %%

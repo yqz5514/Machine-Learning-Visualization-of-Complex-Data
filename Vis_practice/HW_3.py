@@ -99,16 +99,186 @@ male = sex_df[sex_df['sex']=='Male']
 female = sex_df[sex_df['sex']=='Female']
 #%%
 #10
-fig, axs =plt.subplots(1,2,figsize=(15, 5), sharey=True)
-sns.histplot(x='flipper_length_mm',
-            data=male,
-            hue='sex',
-            ax=axs[0])
-sns.histplot(x='flipper_length_mm',
-            data=female,
-            hue='sex',
-            ax=axs[1])
-fig.show()
+# fig, axs =plt.subplots(1,2,figsize=(15, 5), sharey=True)
+# sns.histplot(x='flipper_length_mm',
+#             data=male,
+#             hue='sex',
+#             ax=axs[0])
+# sns.histplot(x='flipper_length_mm',
+#             data=female,
+#             hue='sex',
+#             ax=axs[1])
+# fig.show()
+sns.displot(data=penguins, x="flipper_length_mm", col="sex")
 #`displot` is a figure-level function and does not accept the ax= parameter. You may wish to try histplot.
 # %%
+#11
+sns.displot(data=penguins, 
+            x="flipper_length_mm", 
+            hue="species", 
+            stat = "density")
 
+# %%
+#12
+sns.displot(data=penguins, 
+            x="flipper_length_mm", 
+            hue="sex",
+            stat = "density")
+
+# %%
+#13
+sns.displot(data=penguins, 
+            x="flipper_length_mm", 
+            hue="species", 
+            stat = "probability")
+
+# %%
+#14??
+
+sns.displot(data=penguins, x="flipper_length_mm", hue="species", kind='kde')
+
+# %%
+#15
+sns.displot(data=penguins, x="flipper_length_mm", hue="sex", kind='kde')
+
+# %%
+#16
+sns.displot(data=penguins, x="flipper_length_mm", hue="species", kind='kde',multiple='stack')
+
+# %%
+#17
+sns.displot(data=penguins, 
+            x="flipper_length_mm", 
+            hue="sex", 
+            
+            multiple='stack',
+            kind='kde'
+            #fill = True
+            )
+
+# %%
+#18
+sns.displot(data=penguins, 
+            x="flipper_length_mm", 
+            hue="species", 
+            kind='kde',
+            fill = True
+            )
+# %%
+#19
+sns.displot(data=penguins, 
+            x="flipper_length_mm", 
+            hue="sex", 
+            kind='kde',
+            fill = True
+            )
+# %%
+#20
+sns.relplot(data=penguins,
+            x = 'bill_length_mm',
+            y = 'bill_depth_mm',
+            kind = 'line',
+            )
+plt.show()
+# %%
+sns.relplot(data=penguins,
+            x = 'bill_length_mm',
+            y = 'bill_depth_mm',
+            kind = 'scatter',
+            )
+plt.show()
+# %%
+#21
+sns.countplot(data =penguins,
+              x = 'island',
+              hue = 'species')
+plt.show
+# %%
+sns.countplot(data =penguins,
+              x = 'sex',
+              hue = 'species')
+plt.show
+# %%
+#23
+sns.kdeplot(data=penguins,
+             x = 'bill_length_mm',
+             y = 'bill_depth_mm',
+             hue = 'sex',
+             fill = True
+             )
+plt.show()
+#%%
+sns.kdeplot(data=penguins,
+             x = 'bill_length_mm',
+             y = 'flipper_length_mm',
+             hue = 'sex',
+             fill = True
+             )
+plt.show()
+
+# %%
+sns.kdeplot(data=penguins,
+             x = 'flipper_length_mm',
+             y = 'bill_depth_mm',
+             hue = 'sex',
+             # fill = True,
+             #palette='crest'
+             cbar = True
+             )
+plt.show()
+# %%
+#26
+fig, axs =plt.subplots(3,1,figsize=(10,18), sharey=True)
+sns.kdeplot(data=penguins,
+             x = 'bill_length_mm',
+             y = 'bill_depth_mm',
+             hue = 'sex',
+             fill = True,
+             log_scale= True,
+            
+             ax=axs[0]
+             )
+
+sns.kdeplot(data=penguins,
+             x = 'bill_length_mm',
+             y = 'flipper_length_mm',
+             hue = 'sex',
+             fill = True,
+             log_scale= True,
+             ax=axs[1]
+             )
+
+sns.kdeplot(data=penguins,
+             x = 'flipper_length_mm',
+             y = 'bill_depth_mm',
+             hue = 'sex',
+             fill = True,
+             log_scale= True,
+             ax=axs[2]
+             )
+
+fig.show()
+# %%
+#27
+sns.displot(penguins,
+            x='bill_length_mm',  
+            y='bill_depth_mm',
+            hue='sex')  
+plt.show()
+
+# %%
+#flipper_length_mm
+sns.displot(penguins,
+            x='bill_length_mm',  
+            y='flipper_length_mm',
+            hue='sex')  
+plt.show()
+
+# %%
+#29
+sns.displot(penguins,
+            x='flipper_length_mm',  
+            y='bill_depth_mm',
+            hue='sex')  
+plt.show()
+# %%

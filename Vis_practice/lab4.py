@@ -97,16 +97,18 @@ matrix = np.array(stocks)
 print(matrix)
 
 # %%
-H = (matrix.T.dot(matrix))
+#H = (matrix.T.dot(matrix))
+H = (stocks.T.dot(stocks))
 # %%
-s, d,v = np.linalg.svd(H) 
-print("SingularValues = ",d)
+[s,d,v] = np.linalg.svd(H) 
+print("SingularValues = ", d)
 # %%
-np.linalg.cond(matrix)
+#np.linalg.cond(matrix)
+np.linalg.cond(stocks)
 #Weak Degree of Co-linearity(DOC)
 # %%
 #c
-corr = stock1.corr()
+corr = stocks.corr()
 #%%
 import seaborn as sns
 import matplotlib.pyplot as plt

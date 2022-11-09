@@ -1261,3 +1261,143 @@ queation1_layout =html.Div([
     html.P('Input')
 ])
 
+
+
+########################################Nov/9/22####################################
+#%%
+# pca analysis
+import plotly.express as px
+import numpy as np
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+#%%
+df = px.data.iris()
+# %%
+features = df.columns[:-2]
+print(features)
+# %%
+X = df[features].values
+Y = df.species.values
+# %%
+# standarlization
+X = StandardScaler().fit_transform(X)
+# PCA analysis
+pca = PCA(n_components = 2, svd_solver = 'full') #n_components = useful feature number 
+pca.fit(X)
+X_PCA = pca.transform(X)
+print(f'explained variance ratio {pca.explained_variance_ratio_}') 
+print(f'singular values {pca.singular_values_}')
+
+# pca will only tell how many subset we need for 
+# explained XX% of variance
+
+#%%
+# ploting pca
+import matplotlib.pyplot as plt
+plt.figure()
+plt.plot(np.arrange(1,len(np.cumcum(pca.explained_variance_ratio_))+1,1))
+plt.grid()
+#plt.xticks(np.arrange(1,len(np.cumcum(pca.explained_variance_ratio_))+1,1))
+plt.xlabel('number of components')
+plt.ylabel('cumlative explained variance')
+plt.show() 
+
+#%%
+# SVD condition numebr 
+X = df[features].values
+H = X.T @ X
+-,d,_ = np.linalg.svd(H)
+print('Original singular values', d)
+print('The Condition number is original features', np.linalg.cond(X))
+
+H = X_PCA.T @ X_PCA
+-,d,_ = np.linalg.svd(H)
+print('Transformed singular values', d)
+print('The Condition number is transformed features', np.linalg.cond(X))
+# lower the condiiton number the lower the colinearity 
+
+#%%
+# creating app and push it to the gcp
+import dash 
+from dash import dcc, html
+#import dash as html
+from dash.dependencies import Input, Output
+
+steps = 0.01
+# %%
+steps = 0.01
+
+my_app = dash.Dash('My App')
+
+#phase three
+# Divioison is a section of app
+my_app.layout=html.Div([
+    dcc.Graph(id = 'my_graph'),
+    html.P('Mean'),
+    dcc.Slider(id = 'mean',
+               min = -3,
+               max = 3,
+               value = 0,#The value of the input
+               step =steps,
+               marks = {i:f'{i}' for i in range(-3,3)}),
+    html.Br(),
+    html.Br(),
+  
+    
+    html.P('std'),
+    dcc.Slider(id = 'std',
+               min = 1, # can not be negative number 
+               max = 3,
+               value = 1,
+               step= steps,
+               marks = {i:f'{i}' for i in range(0,3)}),
+    
+    html.Br(),
+    html.Br(),
+    
+    html.P('number of samples'),
+    dcc.Slider(id = 'samples',
+               min = 1, # can not be negative number 
+               max = 10000,
+               value = 1000,
+               #step = steps,# samples can not be float
+               marks = {1:'1', 100:'100',1000:'1000',10000:'10000'}),
+               
+    
+    html.Br(),
+    html.Br(),
+    html.P('bins'),
+    dcc.Dropdown(id = 'bins',
+               options = [
+                   {'label':20,'value':20},
+                   {'label':40,'value':40},
+                   {'label':60,'value':60},
+                   {'label':80,'value':80},
+                   {'label':100,'value':100},],
+                   value = 20,clearable = False),                   
+                   
+    
+    
+])
+
+@my_app.callback(
+    Output(component_id = 'my_graph', component_property = 'figure'),
+    [Input(component_id = 'mean', component_property = 'value'),
+    Input(component_id = 'std', component_property = 'value'),
+    Input(component_id = 'samples', component_property = 'value'),
+    Input(component_id = 'bins', component_property = 'value')]
+    )
+
+def display(a1,a2,a3,a4):
+    x = np.random.normal(a1, a2, size=a3)
+    fig = px.histogram(x = x, nbins=a4, range_x=[-6,6])
+    return fig
+
+ #error:'float' object cannot be interpreted as an integer
+my_app.run_server(
+        port=8070,
+        host='0.0.0.0')
+# %%
+# connect to gcp
+

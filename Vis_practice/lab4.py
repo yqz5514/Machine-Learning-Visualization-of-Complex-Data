@@ -91,7 +91,18 @@ stock1
 #%%
 stock1.rename(columns={0: 'GOOG', 1:'AAPL', 2:'AMZN', 3:'FB', 4:'NFLX', 5:'MSFT'}, inplace=True)
 stock1
+
 # %%
+features = stocks.columns
+X = stocks[features].values
+H = X.T @ X
+_,d,_ = np.linalg.svd(H)
+print('Original singular values', d)
+print('The Condition number is original features', np.linalg.cond(X))
+#%%
+#%%
+features
+#%%
 #2
 matrix = np.array(stocks)
 print(matrix)

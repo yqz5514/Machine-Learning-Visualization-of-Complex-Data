@@ -1283,7 +1283,7 @@ Y = df.species.values
 # standarlization
 X = StandardScaler().fit_transform(X)
 # PCA analysis
-pca = PCA(n_components = 2, svd_solver = 'full') #n_components = useful feature number 
+pca = PCA(n_components = 4, svd_solver = 'full') #n_components = useful feature number 
 pca.fit(X)
 X_PCA = pca.transform(X)
 print(f'explained variance ratio {pca.explained_variance_ratio_}') 
@@ -1291,23 +1291,26 @@ print(f'singular values {pca.singular_values_}')
 
 # pca will only tell how many subset we need for 
 # explained XX% of variance
+#%%
+np.arrange(1,3,1)
+#%%
 
 #%%
-# ploting pca
-import matplotlib.pyplot as plt
-plt.figure()
-plt.plot(np.arrange(1,len(np.cumcum(pca.explained_variance_ratio_))+1,1))
-plt.grid()
-#plt.xticks(np.arrange(1,len(np.cumcum(pca.explained_variance_ratio_))+1,1))
-plt.xlabel('number of components')
-plt.ylabel('cumlative explained variance')
-plt.show() 
+# # ploting pca
+# import matplotlib.pyplot as plt
+# plt.figure()
+# plt.plot(np.arrange(1,len(np.cumcum(pca.explained_variance_ratio_))+1,1))
+# plt.grid()
+# #plt.xticks(np.arrange(1,len(np.cumcum(pca.explained_variance_ratio_))+1,1))
+# plt.xlabel('number of components')
+# plt.ylabel('cumlative explained variance')
+# plt.show() 
 
 #%%
 # SVD condition numebr 
 X = df[features].values
 H = X.T @ X
--,d,_ = np.linalg.svd(H)
+_,d,_ = np.linalg.svd(H)
 print('Original singular values', d)
 print('The Condition number is original features', np.linalg.cond(X))
 

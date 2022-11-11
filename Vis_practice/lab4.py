@@ -179,6 +179,8 @@ reduce_f
 #%%
 # SVD condition numebr 
 X1 = df[reduce_f].values
+X1 = StandardScaler().fit_transform(X1)
+
 N = X1.T @ X1
 _,d,_ = np.linalg.svd(N)
 print('Reduced singular values', d)
@@ -253,7 +255,8 @@ fig.add_trace(go.Histogram(x = new_df['Principal col 3'],
                            nbinsx=50,
                            name = 'Principal col 3'),
                             row = 3, col = 1)
-fig.add_trace(go.Histogram(x = new_df['Principal col 4'],                          nbinsx=50,
+fig.add_trace(go.Histogram(x = new_df['Principal col 4'],                          
+                           nbinsx=50,
                            name = 'Principal col 4'),
                             row = 4, col = 1)
 

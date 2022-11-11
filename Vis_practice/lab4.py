@@ -79,6 +79,7 @@ stocks = stock.copy()
 stocks.drop(columns = ['date'], inplace=True)
 #%%
 from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
 
 # The StandardScaler
 ss = StandardScaler()
@@ -93,8 +94,8 @@ stock1.rename(columns={0: 'GOOG', 1:'AAPL', 2:'AMZN', 3:'FB', 4:'NFLX', 5:'MSFT'
 stock1
 
 # %%
-features = stocks.columns
-X = stocks[features].values
+features = stock1.columns
+X = stock1[features].values
 H = X.T @ X
 _,d,_ = np.linalg.svd(H)
 print('Original singular values', d)
@@ -132,5 +133,25 @@ sns.heatmap(corr,
             annot= True)# annot= True will add value to each cube
 plt.title('Correlation Coefficent between features-Original feature space')
 
+
+# %%
+# d
+#%%
+df = px.data.stocks()
+# %%
+features = df.columns[1:]
+print(features)
+# %%
+X = df[features].values
+
+# %%
+# standarlization
+X = StandardScaler().fit_transform(X)
+# PCA analysis
+pca = PCA(n_components = 6, svd_solver = 'full') #n_components = useful feature number 
+pca.fit(X)
+X_PCA = pca.transform(X)
+print(f'explained variance ratio {pca.explained_variance_ratio_}') 
+print(f'singular values {pca.singular_values_}')
 
 # %%

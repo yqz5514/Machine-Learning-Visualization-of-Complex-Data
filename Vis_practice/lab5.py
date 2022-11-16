@@ -164,11 +164,8 @@ my_app.layout = html.Div([
                           html.Br(),
                           html.Br(),
                           
-                          html.H5('Please enter he first number'),
                           
-                          html.Br(),
-                          
-                          html.P('Input:'),
+                          html.P('Please enter he first number'),
                           dcc.Input(id='input1',type='number'),
                           
                           html.Br(),
@@ -185,8 +182,9 @@ my_app.layout = html.Div([
                               ],clearable = False),
                           
                           html.Br(),
+                          html.Br(),
                           
-                          html.P('Input:'),
+                          html.P('Please enter he second number'),
                           dcc.Input(id='Input2',type='number'),
                         
                           html.Br(),
@@ -199,13 +197,14 @@ my_app.layout = html.Div([
 
 @my_app.callback(Output(component_id='my_out', component_property='children'),
                  [Input(component_id='input1', component_property='value'),
-                  Input(component_id='input2', component_property='value'),])
+                  Input(component_id='input2', component_property='value'),
+                  Input(component_id='my_drop', component_property='value'),])
 
 
-def update_output(a1,a3,a2):
+def update_output(a1,a2,a3):
     if a2 == '+':
         n = a1+a3
-        return n
+        return f'the output is {n}'
     elif a2 == '-':
         n = a1-a3
         return n
@@ -227,7 +226,7 @@ def update_output(a1,a3,a2):
 
 
 my_app.run_server(
-    port=8023,
+    port=8034,
     host='0.0.0.0'
 )
 

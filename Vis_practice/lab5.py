@@ -35,6 +35,189 @@ df['UK_sum'] = df.iloc[0:,250:260].astype(float).sum(axis=1)
 df['UK_sum']
 
 #%%
+######################tab######################
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+
+
+my_app = dash.Dash('My App', external_stylesheets = external_stylesheets)
+my_app.layout = html.Div([html.H1('Lab 5', style={'textAlign': 'center'}),
+                          html.Br(),
+                          dcc.Tabs([
+                              dcc.Tab(label='Question 1', children =[
+                                  dcc.Graph(id = 'my_graph'),
+                                  html.H3('COVID global confirmed cased by country'),
+                                  html.P('Country'),
+                                  dcc.Dropdown(id='my_drop',options=[
+                                  {'label': 'US','value':'US'},
+                                  {'label': 'UK_sum','value':'UK_sum'},
+                                  {'label': 'China_sum','value':'China_sum'},
+                                  {'label': 'Germany','value':'Germany'},
+                                  {'label': 'Brazil','value':'Brazil'},
+                                  {'label': 'India','value':'India'},
+                                  {'label': 'Italy','value':'Italy'},
+                                  ],clearable = False)                        
+                                                      
+                                  @my_app.callback(
+                                  Output(component_id = 'my_graph', component_property = 'figure'),
+                                  [Input(component_id = 'my_drop', component_property = 'value')])
+                              
+                                  def display(a1):
+                                               fig = px.line(df,
+                                               x = df['Country/Region'],
+                                               y = a1,#['US','UK_sum','China_sum','Germany','Brazil','India','Italy'],
+                                               width = 1400, height = 700,
+                                           
+                                               #labels = {'value': 'USD($)'}
+                                               )
+                                     return fig
+                                  
+                              
+                          ])
+                          ])
+                          
+                          ])
+
+                             
+                                 
+my_app.run_server(
+        port=8013,
+        host='0.0.0.0')
+
+                        #   dcc.Tab(label='Question 4', value='q4'),
+                        #   dcc.Tab(label='Question 5', value='q5'),
+                        #   dcc.Tab(label='Question 6', value='q6'),
+                          
+                    
+                          
+
+                         
+
+# @my_app.callback(Output(component_id='layout', component_property='children'),
+#                  [Input(component_id='hw-questions', component_property='value')])
+
+
+#%%
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+
+my_app = dash.Dash('Lab5', external_stylesheets=external_stylesheets)
+my_app.layout = html.Div([html.H1('Lab5', style={'textAlign': 'center'}),
+                          html.Br(),
+                          dcc.Tabs(id='hw-questions',
+                          children=[
+                          dcc.Tab(label='Question 1', value='q1'),
+                          dcc.Tab(label='Question 2', value='q2'),
+                          ]),
+
+                          html.Div(id='layout')])
+#q1
+question1_layout = html.Div([
+    dcc.Graph(id = 'graph1'),
+    html.H3('COVID global confirmed cased by country'),
+    html.P('Country'),
+    dcc.Dropdown(id='drop1',options=[
+                              {'label': 'US','value':'US'},
+                              {'label': 'UK_sum','value':'UK_sum'},
+                              {'label': 'China_sum','value':'China_sum'},
+                              {'label': 'Germany','value':'Germany'},
+                              {'label': 'Brazil','value':'Brazil'},
+                              {'label': 'India','value':'India'},
+                              {'label': 'Italy','value':'Italy'},
+                              ],clearable = False),
+    
+])
+
+@my_app.callback(
+    Output(component_id = 'graph1', component_property = 'figure'),
+    [Input(component_id = 'drop1', component_property = 'value'),]
+    )
+
+
+def display(a1):
+    
+    fig = px.line(df,
+              x = df['Country/Region'],
+              y = a1,#['US','UK_sum','China_sum','Germany','Brazil','India','Italy'],
+              width = 1400, height = 700,
+              
+              #labels = {'value': 'USD($)'}
+              )
+    return fig  
+
+
+
+#qestion2
+question2_layout=html.Div([
+    dcc.Graph(id = 'my_graph'),
+    html.H1('The quadratic function f(x)=ax2+bx+c'),
+                          
+    html.P('choose value of a'),
+    dcc.Slider(id = 'a',
+               min = -3,
+               max = 3,
+               value = 0,#The value of the input
+               step =1,
+               marks = {i:f'{i}' for i in range(-3,3)}),
+    html.Br(),
+    html.Br(),
+  
+    
+    html.P('choose value of b'),
+    dcc.Slider(id = 'b',
+               min = -5, # can not be negative number 
+               max = 5,
+               value = 0,
+               step= 1,
+               marks = {i:f'{i}' for i in range(-5,5)}),
+    
+    html.Br(),
+    html.Br(),
+    
+    html.P('choose value of c'),
+    dcc.Slider(id = 'c',
+               min = -10, # can not be negative number 
+               max = 10,
+               value = 0,
+               step = 1,# samples can not be float
+               marks = {i:f'{i}' for i in range(-10,10)}),
+    
+])
+
+@my_app.callback(
+    Output(component_id = 'my_graph', component_property = 'figure'),
+    [Input(component_id = 'a', component_property = 'value'),
+     Input(component_id = 'b', component_property = 'value'),
+     Input(component_id = 'c', component_property = 'value'),]
+    )
+
+
+def display(a1,a2,a3):
+    x1 = np.linspace(-2,2,1000)
+    y1 = a1 * (x1 **2) + a2*x1 +a3
+    q2 = pd.DataFrame({'x_v': x1, 'y_v': y1})
+    fig = px.line(q2,
+              x = q2['x_v'],
+              y = q2['y_v'],
+              width = 1400, height = 700,
+              #labels = {'value': 'USD($)'}
+              )
+    return fig
+
+@my_app.callback(Output(component_id='layout', component_property='children'),
+                 [Input(component_id='hw-questions', component_property='value')])
+def update_layout(ques):
+    if ques == 'q1':
+        return question1_layout
+    elif ques == 'q2':
+        return question2_layout
+
+
+my_app.run_server(
+        port=8018,
+        host='0.0.0.0')
+
+
+
+#%%
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 steps = 0.01
@@ -188,6 +371,7 @@ my_app.layout = html.Div([
                           dcc.Input(id='Input2',type='number'),
                         
                           html.Br(),
+                          html.Br(),
                           html.Div(id='my_out')
                           ])
 
@@ -197,36 +381,36 @@ my_app.layout = html.Div([
 
 @my_app.callback(Output(component_id='my_out', component_property='children'),
                  [Input(component_id='input1', component_property='value'),
-                  Input(component_id='input2', component_property='value'),
+                  Input(component_id='Input2', component_property='value'),
                   Input(component_id='my_drop', component_property='value'),])
 
 
 def update_output(a1,a2,a3):
     if a3 == '+':
-        n = a1+a2
-        return f'The output value is {n}'
+        # n = a1+a2
+        return f'The output value is {a1+a2}'
     elif a3 == '-':
-        n = a1-a2
+        n = np.subtract(a1,a2)
         return f'The output value is {n}'
     elif a3 == '*':
-        n = a1*a2
+        n = np.multiply(a1,a2)
         return f'The output value is {n}'
     elif a3 == '/':
-        n = a1/a2
+        n = np.divide(a1,a2)
         return f'The output value is {n}'
     elif a3 == 'log':
-        n = np.loga2(a1)
+        n = np.log(a1)#???????????????
         return f'The output value is {n}'
     elif a3 == 'square':
-        n = a1**a2
-        return f'The output value is {n}'
+        #n = a1**a2
+        return f'The output value is {a1**a2}'
     elif a3 == 'square_root':
-        n = a1**(1/a2)
-        return f'The output value is {n}'
+        # n = a1**(1/a2)
+        return f'The output value is {a1**(1/a2)}'
 
 
 my_app.run_server(
-    port=8035,
+    port=8023,
     host='0.0.0.0'
 )
 
@@ -365,7 +549,112 @@ my_app.run_server(
         host='0.0.0.0')
 
 
+
+
+
+#%%
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+
+my_app = dash.Dash('Q6', external_stylesheets=external_stylesheets)
+
+# assume you have a "long-form" data frame
+# see https://plotly.com/python/px-arguments/ for more options
+df_bar = pd.DataFrame({
+    "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
+    "Amount": [4, 1, 2, 2, 4, 5],
+    "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"]
+})
+
+fig = px.bar(df_bar, x="Fruit", y="Amount", color="City", barmode="group")
+
+my_app.layout = html.Div(children=[
+    # All elements from the top of the page
+    html.Div([
+        html.Div([
+            html.H1(children='Hello Dash 1'),
+
+            html.Div(children='''
+                Dash: A web application framework for Python.
+            '''),
+
+            dcc.Graph(
+                id='graph1',
+                figure=fig
+            ),  
+            html.P('Slider 1'),
+            dcc.Slider(id = 'mean',
+               min = 0,
+               max = 20,
+               value = 0,#The value of the input
+               step =1,
+               marks = {i:f'{i}' for i in range(0,20)}),
+        ], className='six columns'),
+        html.Div([
+            html.H1(children='Hello Dash 2'),
+
+            html.Div(children='''
+                Dash: A web application framework for Python.
+            '''),
+
+            dcc.Graph(
+                id='graph2',
+                figure=fig
+            ),  
+            html.P('Slider 2'),
+            dcc.Slider(id = 'mean',
+               min = 0,
+               max = 20,
+               value = 0,#The value of the input
+               step =1,
+               marks = {i:f'{i}' for i in range(0,20)}),
+        ], className='six columns'),
+    ], className='row'),
+    # New Div for all elements in the new 'row' of the page
+   html.Div([
+        html.Div([
+            html.H1(children='Hello Dash 3'),
+
+            html.Div(children='''
+                Dash: A web application framework for Python.
+            '''),
+
+            dcc.Graph(
+                id='graph3',
+                figure=fig
+            ),  
+            html.P('Slider 3'),
+            dcc.Slider(id = 'mean',
+               min = 0,
+               max = 20,
+               value = 0,#The value of the input
+               step =1,
+               marks = {i:f'{i}' for i in range(0,20)}),
+        ], className='six columns'),
+        html.Div([
+            html.H1(children='Hello Dash 4'),
+
+            html.Div(children='''
+                Dash: A web application framework for Python.
+            '''),
+
+            dcc.Graph(
+                id='graph4',
+                figure=fig
+            ),  
+            html.P('Slider 4'),
+            dcc.Slider(id = 'mean',
+               min = 0,
+               max = 20,
+               value = 0,#The value of the input
+               step =1,
+               marks = {i:f'{i}' for i in range(0,20)}),
+        ], className='six columns'),
+    ], className='row'),
+])
+
+
+my_app.run_server(
+        port=8111,
+        host='0.0.0.0')
+
 # %%
-df_bar = pd.DataFrame({ "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"], 
-                       "Amount": [4, 1, 2, 2, 4, 5],
-                       "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"] })

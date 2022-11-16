@@ -202,31 +202,31 @@ my_app.layout = html.Div([
 
 
 def update_output(a1,a2,a3):
-    if a2 == '+':
-        n = a1+a3
-        return f'the output is {n}'
-    elif a2 == '-':
-        n = a1-a3
-        return n
-    elif a2 == '*':
-        n = a1*a3
-        return n
-    elif a2 == '/':
-        n = a1/a3
-        return n
-    elif a2 == 'log':
-        n = np.loga3(a1)
-        return n
-    elif a2 == 'square':
-        n = a1**a3
-        return n
-    elif a2 == 'square_root':
-        n = a1**(1/a3)
-        return n
+    if a3 == '+':
+        n = a1+a2
+        return f'The output value is {n}'
+    elif a3 == '-':
+        n = a1-a2
+        return f'The output value is {n}'
+    elif a3 == '*':
+        n = a1*a2
+        return f'The output value is {n}'
+    elif a3 == '/':
+        n = a1/a2
+        return f'The output value is {n}'
+    elif a3 == 'log':
+        n = np.loga2(a1)
+        return f'The output value is {n}'
+    elif a3 == 'square':
+        n = a1**a2
+        return f'The output value is {n}'
+    elif a3 == 'square_root':
+        n = a1**(1/a2)
+        return f'The output value is {n}'
 
 
 my_app.run_server(
-    port=8034,
+    port=8035,
     host='0.0.0.0'
 )
 

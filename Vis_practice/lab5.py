@@ -36,56 +36,56 @@ df['UK_sum']
 
 #%%
 ######################tab######################
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+# external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 
-my_app = dash.Dash('My App', external_stylesheets = external_stylesheets)
-my_app.layout = html.Div([html.H1('Lab 5', style={'textAlign': 'center'}),
-                          html.Br(),
-                          dcc.Tabs([
-                              dcc.Tab(label='Question 1', children =[
-                                  dcc.Graph(id = 'my_graph'),
-                                  html.H3('COVID global confirmed cased by country'),
-                                  html.P('Country'),
-                                  dcc.Dropdown(id='my_drop',options=[
-                                  {'label': 'US','value':'US'},
-                                  {'label': 'UK_sum','value':'UK_sum'},
-                                  {'label': 'China_sum','value':'China_sum'},
-                                  {'label': 'Germany','value':'Germany'},
-                                  {'label': 'Brazil','value':'Brazil'},
-                                  {'label': 'India','value':'India'},
-                                  {'label': 'Italy','value':'Italy'},
-                                  ],clearable = False)                        
+# my_app = dash.Dash('My App', external_stylesheets = external_stylesheets)
+# my_app.layout = html.Div([html.H1('Lab 5', style={'textAlign': 'center'}),
+#                           html.Br(),
+#                           dcc.Tabs([
+#                               dcc.Tab(label='Question 1', children =[
+#                                   dcc.Graph(id = 'my_graph'),
+#                                   html.H3('COVID global confirmed cased by country'),
+#                                   html.P('Country'),
+#                                   dcc.Dropdown(id='my_drop',options=[
+#                                   {'label': 'US','value':'US'},
+#                                   {'label': 'UK_sum','value':'UK_sum'},
+#                                   {'label': 'China_sum','value':'China_sum'},
+#                                   {'label': 'Germany','value':'Germany'},
+#                                   {'label': 'Brazil','value':'Brazil'},
+#                                   {'label': 'India','value':'India'},
+#                                   {'label': 'Italy','value':'Italy'},
+#                                   ],clearable = False)                        
                                                       
-                                  @my_app.callback(
-                                  Output(component_id = 'my_graph', component_property = 'figure'),
-                                  [Input(component_id = 'my_drop', component_property = 'value')])
+#                                   @my_app.callback(
+#                                   Output(component_id = 'my_graph', component_property = 'figure'),
+#                                   [Input(component_id = 'my_drop', component_property = 'value')])
                               
-                                  def display(a1):
-                                               fig = px.line(df,
-                                               x = df['Country/Region'],
-                                               y = a1,#['US','UK_sum','China_sum','Germany','Brazil','India','Italy'],
-                                               width = 1400, height = 700,
+#                                   def display(a1):
+#                                                fig = px.line(df,
+#                                                x = df['Country/Region'],
+#                                                y = a1,#['US','UK_sum','China_sum','Germany','Brazil','India','Italy'],
+#                                                width = 1400, height = 700,
                                            
-                                               #labels = {'value': 'USD($)'}
-                                               )
-                                     return fig
+#                                                #labels = {'value': 'USD($)'}
+#                                                )
+#                                      return fig
                                   
                               
-                          ])
-                          ])
+#                           ])
+#                           ])
                           
-                          ])
+#                           ])
 
                              
                                  
-my_app.run_server(
-        port=8013,
-        host='0.0.0.0')
+# my_app.run_server(
+#         port=8013,
+#         host='0.0.0.0')
 
-                        #   dcc.Tab(label='Question 4', value='q4'),
-                        #   dcc.Tab(label='Question 5', value='q5'),
-                        #   dcc.Tab(label='Question 6', value='q6'),
+#                         #   dcc.Tab(label='Question 4', value='q4'),
+#                         #   dcc.Tab(label='Question 5', value='q5'),
+#                         #   dcc.Tab(label='Question 6', value='q6'),
                           
                     
                           
@@ -215,7 +215,7 @@ my_app.run_server(
         port=8018,
         host='0.0.0.0')
 
-
+#############################################################
 
 #%%
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']

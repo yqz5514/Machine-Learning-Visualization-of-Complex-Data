@@ -349,11 +349,13 @@ my_app.layout = html.Div([
                           
                           
                           html.P('Please enter he first number'),
+                          html.P('input:'),
                           dcc.Input(id='input1',type='number'),
                           
                           html.Br(),
+                          html.Br(),
                           
-                          #html.P('Country')
+                          
                           dcc.Dropdown(id='my_drop',options=[
                               {'label': '+','value':'+'},
                               {'label': '-','value':'-'},
@@ -368,6 +370,7 @@ my_app.layout = html.Div([
                           html.Br(),
                           
                           html.P('Please enter he second number'),
+                          html.P('input:'),
                           dcc.Input(id='Input2',type='number'),
                         
                           html.Br(),
@@ -399,7 +402,7 @@ def update_output(a1,a2,a3):
         n = np.divide(a1,a2)
         return f'The output value is {n}'
     elif a3 == 'log':
-        n = np.log(a1)#???????????????
+        n = a1* np.log(a2)#???????????????
         return f'The output value is {n}'
     elif a3 == 'square':
         #n = a1**a2
@@ -410,7 +413,7 @@ def update_output(a1,a2,a3):
 
 
 my_app.run_server(
-    port=8023,
+    port=8024,
     host='0.0.0.0'
 )
 

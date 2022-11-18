@@ -514,7 +514,10 @@ my_app = dash.Dash('My App', external_stylesheets = ['https://codepen.io/chriddy
 my_app.layout=html.Div([
     dcc.Graph(id = 'my_graph'),
    
-    html.P('Please enter the polynomial order'),
+   html.H1(f'f(x)= x^n'),
+   html.Br(),
+   html.Br(),
+    html.P('Please enter the polynomial order n'),
     dcc.Dropdown(id='my_drop',options=[
                               {'label': 1,'value':1},
                               {'label': 2,'value':2},
@@ -539,16 +542,16 @@ def display(a1):
     x2 = np.linspace(-2,2,1000)
     y2 = (x2**a1)
     q5 = pd.DataFrame({'x_v': x2, 'y_v': y2})
-    fig = px.line(q5,
+    fig5 = px.line(q5,
               x = q5['x_v'],
               y = q5['y_v'],
               width = 1400, height = 700,
               
               )
-    return fig
+    return fig5
 
 my_app.run_server(
-        port=8004,
+        port=8005,
         host='0.0.0.0')
 
 

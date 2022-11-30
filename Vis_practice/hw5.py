@@ -103,7 +103,8 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 steps= 0.001
 image_path = 'assets/hw5_11.png'
 image_path2 = 'assets/hw5_1.JPG'
-
+# need to create assets folder at app local and add local img to the folder 
+# lack of the above step will cause error
 my_app = dash.Dash('Q1', external_stylesheets=external_stylesheets)
 my_app.layout = html.Div([
     html.Img(src=image_path,

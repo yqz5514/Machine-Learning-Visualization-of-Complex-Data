@@ -37,19 +37,24 @@ my_app.layout = html.Div([
                                     value = 1000),
                         
                           html.Br(),
+                          dcc.Graph(id = 'graph1'),
+                           html.Br(),
+                          html.P('The fast foutier transform of above data'),
+                dcc.Graph(id = 'graph2'),
+])
                         
                          
-html.Div([ ### FIGURES Divs
-            html.Div([
-                dcc.Graph(id = 'graph1'),
+# html.Div([ ### FIGURES Divs
+#             html.Div([
+#                 dcc.Graph(id = 'graph1'),
                 
-            ], className = 'six columns'),
-            html.Div([
-                html.P('The fast foutier transform of above data'),
-                dcc.Graph(id = 'graph2'),
-            ], className = 'six columns')
-        ], className = 'row')
-])
+#             ], className = 'six columns'),
+#             html.Div([
+#                 html.P('The fast foutier transform of above data'),
+#                 dcc.Graph(id = 'graph2'),
+#             ], className = 'six columns')
+#         ], className = 'row')
+# ])
                     
 
 
@@ -91,7 +96,7 @@ def update_q1(a1,a2,a3,a4):
     return [graph1, graph2]
 
 my_app.run_server(
-        port=8011,
+        port=8012,
         host='0.0.0.0')
 
 #%%

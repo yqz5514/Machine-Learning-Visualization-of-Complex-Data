@@ -8,11 +8,25 @@ import plotly.express as px
 import pandas as pd
 import numpy as np
 from scipy.fft import fft
+import scipy
 #%%
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-my_app = dash.Dash('Q1', external_stylesheets=external_stylesheets)
-my_app.layout = html.Div([
+my_app = dash.Dash('HW5', external_stylesheets=external_stylesheets)
+my_app.layout = html.Div([html.H1('HW5', style={'textAlign': 'center'}),
+                          html.Br(),
+                          dcc.Tabs(id='hw-questions',
+                          children=[
+                          dcc.Tab(label='Question 1', value='q1'),
+                          dcc.Tab(label='Question 2', value='q2'),
+                          
+                          ]),
+
+                          html.Div(id='layout')])
+#####################3
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+
+question1_layout= html.Div([
                         
                           
                           
@@ -40,7 +54,7 @@ my_app.layout = html.Div([
                           dcc.Graph(id = 'graph1'),
                            html.Br(),
                           html.P('The fast foutier transform of above data'),
-                dcc.Graph(id = 'graph2'),
+                          dcc.Graph(id = 'graph2'),
 ])
                         
                          
@@ -75,7 +89,7 @@ def update_q1(a1,a2,a3,a4):
     fx = np.sin(a1*x) + noise
     
     q1 = pd.DataFrame({'x_v': x, 'y_v': fx})
-    graph1 = px.line(q1,
+    fig1 = px.line(q1,
               x = q1['x_v'],
               y = q1['y_v'],
               width = 600, height = 300,
@@ -83,9 +97,12 @@ def update_q1(a1,a2,a3,a4):
               )
     
     #fig2
+    
     y = fft(fx)
-    q11 = pd.DataFrame({'x_v': x, 'y_v': y})
-    graph2 = px.line(q11,
+    #y_1 = np.abs(y)
+    
+    q11 = pd.DataFrame({'x_v':x, 'y_v': np.abs(y)})
+    fig2 = px.line(q11,
               x = q11['x_v'],
               y = q11['y_v'],
               width = 600, height = 300,
@@ -93,25 +110,16 @@ def update_q1(a1,a2,a3,a4):
               )
                    
 
-    return [graph1, graph2]
-
-my_app.run_server(
-        port=8012,
-        host='0.0.0.0')
-
-#%%
+    return  fig1, fig2
 
 
-
-#%%
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+# question2
 steps= 0.001
 image_path = 'assets/hw5_11.png'
 image_path2 = 'assets/hw5_1.JPG'
-# need to create assets folder at app local and add local img to the folder 
+# need to create assets folder at local app and add local img to the folder 
 # lack of the above step will cause error
-my_app = dash.Dash('Q1', external_stylesheets=external_stylesheets)
-my_app.layout = html.Div([
+question2_layout = html.Div([
     html.Img(src=image_path,
              style={'width': '30%', 
                     'display': 'inline-block', 
@@ -199,10 +207,21 @@ def update_nn(a1,a2,a3,a4,a5,a6,a7):
               #labels = {'value': 'USD($)'}
               )
     return fig
-my_app.run_server(
-        port=8032,
-        host='0.0.0.0')
 
+@my_app.callback(Output(component_id='layout', component_property='children'),
+                 [Input(component_id='hw-questions', component_property='value')])
+
+def update_layout(ques):
+    if ques == 'q1':
+        return question1_layout
+    elif ques == 'q2':
+        return question2_layout
+    
+
+
+my_app.run_server(
+        port=8071,
+        host='0.0.0.0')
     
                  
 

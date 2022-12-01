@@ -1525,3 +1525,81 @@ fig = px.pie(df, values='pop', names='country',
              hover_data=['lifeExp'], labels={'lifeExp':'life expectancy'})
 fig.update_traces(textposition='inside', textinfo='percent+label')
 fig.show()
+
+#%%
+####################normality test
+# z-score can be negtive 
+# tree model, and nive bayes is not need to know the distribution
+# normal ditribution 
+#z-score table negative of z-score is 
+import scipy.stats as st 
+
+#%%
+mean = 0.502
+std = 0.005
+L = 0.496
+U = 0.508
+print(f'the probability that '
+      f'the observation between'
+      f'{U} and {L} is'
+      f'{(st.norm(mean,std).cdf(U) - st.norm(mean,std).cdf(L))*100:.2f}%')
+# the area between lower and upper bound
+# %%
+#Outlier 
+# IQR method
+# this part hould in FTP
+
+#%%
+# normality test
+# they are all hypothesis test, so has error, need to compare between different test
+#QQ plot the more normal the closer to the 45 line
+#k-s test 
+#shapiro-wilk test
+#CLT, if you increased number of samples, eventually it will goes to normal distribution
+
+import numpy as np
+from scipy.stats import rankdata
+import matplotlib.pyplot as plt
+#%%
+T = 5000
+#x = np.random.randn(T) this is noemal distribution
+#non normal distribution:
+x = np.cumsum(np.random.randn(T))
+y = 2*(rankdata(x)/(T+1))-1
+y = np.arctanh(y)# complete the process of above 
+fig,ax = plt.subplots(2,2, figsize = (9,7))
+ax[0,0].plot(x)
+ax[0,0].grid()
+ax[0,0].set_title('Orignal Non-gaussian data')
+ax[0,1].plot(y)
+ax[0,1].set_title('Transformed Non-gaussian data')
+ax[1,0].hist(x, bins=50)
+ax[1,1].hist(y, bins=50)
+plt.tight_layout()
+plt.show()
+
+# plt.figure()
+# plt.hist(x,
+#          bin=50)
+# plt.show()
+
+# %%
+#QQpltt
+from statsmodels.graphics.gofplots import qqplot
+
+#%%
+plt.figure()
+qqplot(x,line='s')
+plt.title('Raw data')
+plt.show()
+
+plt.figure()
+qqplot(y,line='s')
+plt.title('Transformed data')
+plt.show()
+
+
+#%%
+#normality yesy shapiro
+shapiro_test(x, 'raw data')
+shapiro_test(y, 'transformed data')

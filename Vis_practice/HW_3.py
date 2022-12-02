@@ -24,7 +24,7 @@ penguins.isnull().sum()
 # %%
 plt.style.use('seaborn-darkgrid')
 
-
+  
 # %%
 sns.histplot(data=penguins,
              x='flipper_length_mm',

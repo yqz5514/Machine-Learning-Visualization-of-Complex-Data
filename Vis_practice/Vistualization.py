@@ -763,7 +763,7 @@ sns.countplot(data = diamonds,
               order = reversed(diamonds['clarity'].value_counts().index[::-1]))#desacding order
 plt.show
 # %%
-sns.barplot(data='diamonds',
+sns.barplot(data=diamonds,
             x = 'color')
 plt.show()
 # %%

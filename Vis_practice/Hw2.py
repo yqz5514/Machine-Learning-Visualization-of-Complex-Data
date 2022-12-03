@@ -60,13 +60,10 @@ def get_subplot(col):
     plt.tight_layout()
     plt.show()
     #fig.savefig(col+' plots for all stocks', dpi = 500)
-    fig.savefig(fname=(col +' plots for all stocks.eps'), format = 'eps',dpi = 500)
+    #fig.savefig(fname=(col +' plots for all stocks.eps'), format = 'eps',dpi = 500)
 #%%
 get_subplot('High') 
-
-#%%
 get_subplot('Low')
-#%%
 get_subplot('Open')
 get_subplot('Close')
 get_subplot('Volume')
@@ -112,11 +109,10 @@ def get_subplot_hist(col):
     plt.tight_layout()
     plt.show()
     
-    fig.savefig(fname=('Histgoram of '+col+' for all stocks'), format = 'eps',dpi = 500)
+    #fig.savefig(fname=('Histgoram of '+col+' for all stocks'), format = 'eps',dpi = 500)
     
 # %%
 get_subplot_hist('High')
-#%%
 get_subplot_hist('Low')
 get_subplot_hist('Open')
 get_subplot_hist('Close')
@@ -127,23 +123,23 @@ get_subplot_hist('Adj Close')
 # %%
 corr_table = aapl.corr()
 corr_table
-#%%
-df1 = corr_table.reset_index(inplace=True)
-#%%
-print(df1)
+# #%%
+# df1 = corr_table.reset_index(inplace=True)
+# #%%
+# print(df1)
 #%%
 names = ['High','Low','Open','Close','Volume','Adj Close']
-#%%
-for i in names:
+# #%%
+# for i in names:
     
-    print(corr_table.loc[[i]])
-#%%
-corr_table.loc[[0]]
-#%%
-t.tolist()
-#%%
-for i in names:
-    print(corr_table.loc[corr_table[i]])
+#     print(corr_table.loc[[i]])
+# #%%
+# corr_table.loc[[0]]
+# #%%
+# t.tolist()
+# #%%
+# for i in names:
+#     print(corr_table.loc[corr_table[i]])
 # %%
 from prettytable import PrettyTable
 
@@ -165,44 +161,23 @@ def get_table(com):
     #x.field_names(i)
         x.add_row([i, *df[i].tolist()])
         #x.title('Corr table of '+ com)
-    print(x.get_string(title = 'Corr table of yelp'))
+    print(x.get_string(title = 'Corr table'))
     return
 
 #%%
-get_table(yelp)
-#%%
+get_table(aapl)
 get_table(orcl)
 get_table(tsla)
 get_table(ibm)
 get_table(msft)
 get_table(yelp)
-#%%
-#names = ['Name','High','Low','Open','Close','Volume','Adj Close']
-x = PrettyTable()
 
-x.field_names = ['Name','High','Low','Open','Close','Volume','Adj Close']
-x.add_row(['High', *corr_table['High'].tolist()])
-#%%
-#_ = aapl[aapl.columns].hist(figsize=(16, 16))
-# %%
-#correlation matrix
-from tabulate import tabulate
-aapl_corr = tabulate(corr_table, headers = 'keys', tablefmt = 'psql')
-aapl_corr.get_string(title = 'Corr_table')
 #%%
 fig = plt.figure()
 pd.plotting.scatter_matrix(aapl, hist_kwds= {'bins' : 50} , alpha = 0.5, s = 10, diagonal = 'kde')
 #plt.savefig(fname=('scatter_matrix.eps''), format = 'eps',dpi = 500 )
-#%%
-pd.plotting.scatter_matrix(aapl, hist_kwds= {'bins' : 50} , alpha = 0.5, s = 10, diagonal = 'hist', grid = True, figsize=(18,18) )
 
-# %%
-# %%
-aapl['High'].corr(aapl['Low'])
-#%%
-#fig, ax = plt.subplots(6,6,figsize=(16,16))
-#for i in range(6):
-    
+
     
 # %%
 def get_sca(com):
@@ -396,7 +371,7 @@ def get_sca(com):
     plt.tight_layout()
     plt.show()
     
-    fig.savefig(fname=('Q9'), format='eps', dpi = 500)
+    #fig.savefig(fname=('Q9'), format='eps', dpi = 500)
 # %%
 get_sca(aapl)
 #%%

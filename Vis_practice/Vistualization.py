@@ -954,7 +954,7 @@ fig = px.line(iris,
               template = 'plotly_white'
               
               )
-
+fig.write_html('first_figure.html', auto_open=True)
 #%%
 fig = px.scatter(gapminder,
                  x = 'gdpPercap',
@@ -968,7 +968,7 @@ fig = px.scatter(gapminder,
                  range_y = [25, 90],
                  title = 'GDP'
                  )
-fig.show()
+fig.write_html('first_figure.html', auto_open=True)
 #%%
 fig = px.choropleth(gapminder,
                  location = 'iso_alpha',
@@ -982,7 +982,7 @@ fig = px.choropleth(gapminder,
                  #range_y = [25, 90],
                  title = 'GDP'
                  )
-fig.show()
+fig.write_html('first_figure.html', auto_open=True)
 
 #%%
 # horizontal bar plot
@@ -992,7 +992,7 @@ fig = px.bar(tip,
              color = 'sex',
              barmode = 'stack'
              )
-fig.show() 
+fig.write_html('first_figure.html', auto_open=True) 
 
 #%%
 # diamond 

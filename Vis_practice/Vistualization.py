@@ -1276,6 +1276,8 @@ df = px.data.iris()
 # %%
 features = df.columns[:-2]
 print(features)
+#%%
+df.columns
 # %%
 X = df[features].values
 Y = df.species.values

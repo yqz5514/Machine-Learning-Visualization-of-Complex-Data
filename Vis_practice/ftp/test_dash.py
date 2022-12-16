@@ -1,10 +1,11 @@
 
 #%%
+
 import pandas as pd
 import matplotlib.pyplot as plt
 from plotly.tools import mpl_to_plotly
 import numpy as np
-import seaborn as sns
+#import seaborn as sns
 import plotly.express as px
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
@@ -350,7 +351,7 @@ def update_normal_plot(a1):
 
         return fig_normal_hist
     
-     if a1 == 'QQ Plot':
+     elif a1 == 'QQ Plot':
         return plotly_fig
     
 my_app.run_server(

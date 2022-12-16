@@ -876,6 +876,7 @@ plt.show()
 # %%
 import plotly.express as px
 import numpy as np
+
 import pandas as pd
 # %%
 x = np.linspace(-8,8,100)

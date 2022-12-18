@@ -36,8 +36,6 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 my_app = dash.Dash('My App', external_stylesheets=['https://codepen.io/chriddyp/pen/bWLwgP.css'])
 
-# phase three
-# Divioison is a section of app
 my_app.layout = html.Div([
                 html.Br(),
                 html.Br(),

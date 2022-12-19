@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b16210c5-4e46-4b52-aca2-fefa633c0666" name="Changes" comment="" />
+    <list default="true" id="b16210c5-4e46-4b52-aca2-fefa633c0666" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -58,6 +60,7 @@
       <workItem from="1671202877673" duration="24844000" />
       <workItem from="1671240950133" duration="7281000" />
       <workItem from="1671290300619" duration="14830000" />
+      <workItem from="1671379130681" duration="2094000" />
     </task>
     <servers />
   </component>
@@ -93,7 +96,7 @@
     <SUITE FILE_PATH="coverage/Machine_Learning_Visualization_of_Complex_Data$test_date_board.coverage" NAME="test date board Coverage Results" MODIFIED="1671205829446" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Vis_practice/ftp" />
     <SUITE FILE_PATH="coverage/Machine_Learning_Visualization_of_Complex_Data$refrence.coverage" NAME="refrence Coverage Results" MODIFIED="1671246917353" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Vis_practice/ftp" />
     <SUITE FILE_PATH="coverage/Machine_Learning_Visualization_of_Complex_Data$airport_line.coverage" NAME="airport_line Coverage Results" MODIFIED="1671244402488" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Vis_practice/ftp" />
-    <SUITE FILE_PATH="coverage/Machine_Learning_Visualization_of_Complex_Data$final_draft.coverage" NAME="final draft Coverage Results" MODIFIED="1671317261233" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Vis_practice/ftp" />
+    <SUITE FILE_PATH="coverage/Machine_Learning_Visualization_of_Complex_Data$final_draft.coverage" NAME="final draft Coverage Results" MODIFIED="1671379154671" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Vis_practice/ftp" />
     <SUITE FILE_PATH="coverage/Machine_Learning_Visualization_of_Complex_Data$normal_with_test.coverage" NAME="normal with test Coverage Results" MODIFIED="1671205174605" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Vis_practice/ftp" />
     <SUITE FILE_PATH="coverage/Machine_Learning_Visualization_of_Complex_Data$airline_delay_count_pie.coverage" NAME="airline_delay_count_pie Coverage Results" MODIFIED="1671293201195" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Vis_practice/ftp" />
   </component>
